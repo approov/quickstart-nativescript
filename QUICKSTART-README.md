@@ -29,7 +29,7 @@ There are actually two different versions of the plugin depending on whether you
 
 | NS Version | ns-approov-sdk version | Install command | Docs |
 | ---        | ---                       | ---             | --- |
-| ^7.0.0 | ^7.0.0 | ns plugin add @approov/ns-approov-sdk^7.0.5 | [Here](https://github.com/approov/quickstart-nativescript/blob/main/QUICKSTART-README.md) |
+| ^7.0.0 | ^7.0.0 | ns plugin add @approov/ns-approov-sdk@^7.0.5 | [Here](https://github.com/approov/quickstart-nativescript/blob/main/QUICKSTART-README.md) |
 | ^6.0.0 | ^6.0.0 | tns plugin add @approov/ns-approov-sdk@^6.0.1 | [Here](https://github.com/approov/quickstart-nativescript/blob/ns-v6/QUICKSTART-README.md) |
 
 ## RUNNING THE SHAPES APP WITHOUT APPROOV
