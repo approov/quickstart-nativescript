@@ -1,5 +1,5 @@
 {
-  "name": "quickstart-nativescript",
+  "name": "ns-approov-sdk",
   "version": "7.0.0",
   "description": "Approov SDK support for nativescript with angular/vue support and TLS pinning",
   "main": "approov-sdk",
