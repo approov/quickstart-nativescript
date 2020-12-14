@@ -31,7 +31,7 @@ export function pageLoaded(args: EventData) {
 
 export async function onHelloButtonTap() {
   try {
-    const response = await HttpModule.getJSON<any>({ // Comment when Using Approov
+    const response = await HttpModule.getJSON<any>({
       method: 'GET',
       url: HELLO_URL
     });
