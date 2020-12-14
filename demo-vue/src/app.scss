@@ -1,0 +1,29 @@
+// NativeScript core theme
+// @see https://docs.nativescript.org/ui/theme
+@import '~@nativescript/theme/core';
+@import '~@nativescript/theme/default';
+
+// Override variables here
+
+// Global SCSS styling
+// @see https://docs.nativescript.org/ui/styling
+
+Button.-primary {
+  font-size: 18;
+}
+
+.heading {
+  font-size: 32;
+  text-align: center;
+  margin: 10 0;
+}
+
+.sub-text {
+  font-size: 18;
+  margin: 10;
+}
+
+Image {
+  width: 250;
+  height: 250;
+}

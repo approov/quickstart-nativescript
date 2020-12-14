@@ -1,0 +1,14 @@
+<GridLayout rows="auto,*,auto" columns="*" height="100%">
+    <Label text="Approov Shapes (Angular)" class="heading" row="0"></Label>
+    <!-- Image Container -->
+    <StackLayout orientation="vertical" horizontalAlignment="center" verticalAlignment="center" row="1">
+        <Image src="{{ imageUrl }}"></Image>
+
+        <Label text="{{ message }}" textWrap="true" class="text-center sub-text"></Label>
+    </StackLayout>
+    <FlexboxLayout col="0" row="2" justifyContent="space-around" margin="20">
+        <!-- Buttons -->
+        <Button text="Hello" (tap)="onHelloButtonTap()" class="-primary -rounded-lg" padding="5"></Button>
+        <Button text="Shape" (tap)="onShapeButtonTap()" class="-primary -rounded-lg" padding="5"></Button>
+    </FlexboxLayout>
+</GridLayout>

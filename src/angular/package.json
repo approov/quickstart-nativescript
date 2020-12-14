@@ -1,0 +1,16 @@
+{
+  "name": "ns-approov-sdk-angular",
+  "ngPackage": {
+    "lib": {
+      "entryFile": "index.ts",
+      "umdModuleIds": {
+        "@nativescript/core": "ns-core",
+        "@nativescript/angular": "ns-angular",
+        "ns-approov-sdk": "ns-ns-approov-sdk"
+      }
+    },
+    "whitelistedNonPeerDependencies": [
+      "."
+    ]
+  }
+}
