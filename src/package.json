@@ -1,6 +1,9 @@
 {
-  "name": "ns-approov-sdk",
+  "name": "@approov/ns-approov-sdk",
   "version": "6.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Approov SDK support for nativescript with angular/vue support and TLS pinning",
   "main": "approov-sdk",
   "typings": "index",
@@ -59,12 +62,13 @@
     "Nativescript Https",
     "Nativescript SSL",
     "Nativescript certificate pinning",
-    "Nativesctipt Angular",
+    "Nativescript Angular",
     "secure",
+    "pinning",
     "nativescript ssl pinning",
     "SSL",
-    "Nativesscript TSL",
-    "TSL",
+    "Nativescript TLS",
+    "TLS",
     "Nativescript dynamic pinning",
     "Nativescript public key pinning",
     "Public key pinning",
@@ -72,11 +76,11 @@
     "Approov SDK",
     "ns approov",
     "ns approov sdk",
-    "approov dynamic pinning"
+    "Approov dynamic pinning"
   ],
   "author": {
-    "name": "Richard Taylor",
-    "email": "richardt@criticalblue.com"
+    "name": "Critical Blue Ltd.",
+    "email": "support@approov.io"
   },
   "bugs": {
     "url": "https://github.com/approov/quickstart-nativescript"
