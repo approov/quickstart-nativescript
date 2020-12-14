@@ -1,6 +1,6 @@
-import { Headers } from '@nativescript/core/http';
-import { knownFolders } from '@nativescript/core/file-system';
-import * as applicationSettings from '@nativescript/core/application-settings';
+import { Headers } from 'tns-core-modules/http';
+import { knownFolders } from 'tns-core-modules/file-system';
+import * as applicationSettings from 'tns-core-modules/application-settings';
 
 export interface RequestBody {
   [key: string]: any;
@@ -82,7 +82,7 @@ export abstract class NSApproovCommon {
    * This file is automatically added in the application assets when building the plugin.
    * @protected
    */
-  protected static async getInitialConfig(initialConfigFileName: string): Promise<string> {
+  static async getInitialConfig(initialConfigFileName: string): Promise<string> {
     let assetsDir = knownFolders.currentApp().getFolder('assets');
     if (!assetsDir.contains(initialConfigFileName)) {
       return Promise.reject(`approov-sdk => Config file {${initialConfigFileName}} does not exists in the assets directory`);
@@ -124,10 +124,13 @@ export abstract class NSApproovCommon {
   }
 
   static isMultipartFormRequest(headers: Record<string, string | string[]>): boolean {
-    return headers['Content-Type'].includes('application/x-www-form-urlencoded') || headers['Content-Type'].includes('multipart/form-data');
+    const headerValue = headers['Content-Type'].toString();
+
+    return headerValue.includes('application/x-www-form-urlencoded') || headerValue.includes('multipart/form-data');
   }
 
-  static set approovInitialized(initialized: boolean) {
+  static approovInitialized(initialized: boolean) {
+    console.log('Setting Approov Initialization -> ', initialized);
     approovInitialized = initialized;
   }
 }

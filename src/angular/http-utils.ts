@@ -1,6 +1,6 @@
-import { NSFileSystem } from '@nativescript/angular';
+import { NSFileSystem } from 'nativescript-angular/file-system/ns-file-system';
 import { Observable, Observer } from 'rxjs';
-import { path } from '@nativescript/core';
+import { path } from 'tns-core-modules/file-system/file-system';
 
 export type httpResponseFactory<T> = (url: string, body: any, status: number) => T;
 export type httpErrorFactory = (url: string, body: any, status: number) => any;

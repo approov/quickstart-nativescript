@@ -8,10 +8,10 @@ import {
 import { Observable, from, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { HttpResponse as ApproovHttpResponse } from '../approov-sdk.common';
 import { ExcludedService } from './excluded.service';
-// @ts-ignore (FOR ANGULAR ng-packgr)
-import { NSApproov, HttpResponse as ApproovHttpResponse } from 'ns-approov-sdk';
-import { NSFileSystem } from '@nativescript/angular';
+import { NSApproov } from '..';
+import { NSFileSystem } from 'nativescript-angular/file-system/ns-file-system';
 import { isLocalRequest, processLocalFileRequest } from './http-utils';
 
 @Injectable()

@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
-  selector: 'ns-app',
-  moduleId: module.id,
-  templateUrl: './app.component.html'
+    selector: 'ns-app',
+    templateUrl: './app.component.html'
 })
 export class AppComponent {
   readonly imageBaseUrl = '~/assets/';

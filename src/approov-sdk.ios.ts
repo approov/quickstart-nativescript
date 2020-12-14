@@ -4,10 +4,9 @@ import {
   NSApproovCommon, ApproovConstants, getHostnameFromUrl
 } from './approov-sdk.common';
 import { Logger } from './logger';
-import { isNullOrUndefined, isObject } from '@nativescript/core/utils/types';
-import * as applicationSettings from '@nativescript/core/application-settings';
-import { iOSNativeHelper } from '@nativescript/core/utils';
-import MajorVersion = iOSNativeHelper.MajorVersion;
+import { isNullOrUndefined, isObject } from 'tns-core-modules/utils/types';
+import * as applicationSettings from 'tns-core-modules/application-settings';
+import * as utils from 'tns-core-modules/utils/utils';
 
 // @dynamic
 export class NSApproov extends NSApproovCommon {
@@ -15,21 +14,22 @@ export class NSApproov extends NSApproovCommon {
    * Initializes the Approov SDK for IOS
    */
   static async initialize(initialConfigFileName: string = ApproovConstants.INITIAL_CONFIG): Promise<void> {
-    if (this.approovInitialized) {
-      Logger.warning('Approov SDK already initialized.');
+    if (this.isApproovInitialized()) {
+      Logger.info('Approov SDK already initialized.');
       return;
     }
     const initialConfig = await this.getInitialConfig(initialConfigFileName);
     const dynamicConfig = NSApproov.getDynamicConfig();
     Approov.initializeUpdateConfigCommentError(initialConfig, dynamicConfig, 'Initialization Error.');
 
-    Logger.info('Approov SDK initialized successfully.');
-
     if (!dynamicConfig) {
       await this.saveDynamicConfig();
     }
 
-    this.approovInitialized = true;
+    this.approovInitialized(true);
+
+    Logger.info('Approov SDK initialized successfully.');
+
   }
 
   /**
@@ -65,7 +65,7 @@ export class NSApproov extends NSApproovCommon {
     const dynamicConfig = Approov.fetchConfig();
     Logger.info('Dynamic config fetched successfully.');
     if (!dynamicConfig) {
-      return Logger.warning('Unable to fetch the dynamic config.');
+      return Logger.info('Unable to fetch the dynamic config');
     }
 
     applicationSettings.setString(ApproovConstants.DYNAMIC_CONFIG, dynamicConfig);
@@ -74,11 +74,11 @@ export class NSApproov extends NSApproovCommon {
   static AFSuccess(resolve, task: NSURLSessionDataTask, data?: NSDictionary<string, any> & NSData & NSArray<any>) {
     let content: any;
     if (data && data.class) {
-      if (data.enumerateKeysAndObjectsUsingBlock || data.class().name === 'NSArray') {
+      if (data.enumerateKeysAndObjectsUsingBlock || (<any>data) instanceof NSArray) {
 
         let serial = NSJSONSerialization.dataWithJSONObjectOptionsError(data, NSJSONWritingOptions.PrettyPrinted);
         content = NSString.alloc().initWithDataEncoding(serial, NSUTF8StringEncoding).toString();
-      } else if (data.class().name === 'NSData') {
+      } else if ((<any>data) instanceof NSData) {
         content = NSString.alloc().initWithDataEncoding(data, NSASCIIStringEncoding).toString();
       } else {
         content = data;
@@ -94,18 +94,17 @@ export class NSApproov extends NSApproovCommon {
   }
 
   static AFFailure(resolve, reject, task: NSURLSessionDataTask, error: NSError) {
-    const data: NSDictionary<string, any> & NSData & NSArray<any> = error.userInfo.valueForKey(AFNetworkingOperationFailingURLResponseDataErrorKey);
+    let data: NSDictionary<string, any> & NSData & NSArray<any> = error.userInfo.valueForKey(AFNetworkingOperationFailingURLResponseDataErrorKey);
     const response = (task.response as NSHTTPURLResponse);
-    const parsedData = getData(data);
+    let parsedData = getData(data);
 
-    const reason = error.localizedDescription;
-
+    let reason = error.localizedDescription;
     reject({
       task,
       content: parsedData,
       reason: reason === 'cancelled' ? 'Pinning Failed, cancelling request' : reason,
-      statusCode: response?.statusCode || 0,
-      headers: response?.allHeaderFields || {}
+      statusCode: (response || {})['statusCode'] || 0,
+      headers: (response || {})['allHeaderFields'] || {}
     });
   }
 
@@ -118,7 +117,11 @@ export class NSApproov extends NSApproovCommon {
 
         opts.headers = opts.headers || {};
 
-        if (opts.headers && (<any> opts.headers['Content-Type'])?.substring(0, 16) === 'application/json') {
+        if (
+          opts.headers &&
+          opts.headers['Content-Type'] &&
+          opts.headers['Content-Type'].toString().substring(0, 16) === 'application/json'
+        ) {
           manager.requestSerializer = AFJSONRequestSerializer.serializer();
           manager.responseSerializer = AFJSONResponseSerializer.serializerWithReadingOptions(NSJSONReadingOptions.AllowFragments);
         } else {
@@ -130,7 +133,7 @@ export class NSApproov extends NSApproovCommon {
         const host = getHostnameFromUrl(opts.url);
 
         // Is Approov Is initialized we then fetch the approov token
-        if (NSApproov.isApproovInitialized()) {
+        if (NSApproovCommon.isApproovInitialized()) {
           const approovHeader = NSApproov.getDomainHeader(host);
 
           if (approovHeader.binding) {
@@ -260,10 +263,8 @@ function getASNIHeaderBase64String(size: number): string {
     case 384:
       return 'MHYwEAYHKoZIzj0CAQYFK4EEACIDYgA=';
     case 2048:
-      return 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A';
     default:
-      Logger.warning('Invalid ASNI header for SSL certificate! Cancelling Request.');
-      return null;
+      return 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A';
   }
 }
 
@@ -271,15 +272,15 @@ function getASNIHeaderBase64String(size: number): string {
  * Retrieves the public key data from the certificate
  */
 function getPublicKeyData(certificate: any): any {
-  if (MajorVersion >= 12) {
-    // This wil only work for IOS 12 and above
+  if (utils.ios.MajorVersion >= 12) {
     return SecCertificateCopyKey(certificate);
   }
 
-  // Fallback for lower IOS versions
   let trust = new interop.Reference();
   const policy = SecPolicyCreateBasicX509();
   SecTrustCreateWithCertificates(certificate, policy, trust);
+
+  // console.log('Evaluated Trust => ', trust.value);
 
   // Get ref from the trust
   let result = new interop.Reference<SecTrustResultType>();
@@ -337,11 +338,6 @@ function SessionDidReceiveAuthenticationChallengeBlock(session: NSURLSession, ch
 
     const base46EncodedPublicKey = getASNIHeaderBase64String(keySize) + mutableBytes.base64EncodedStringWithOptions(0);
 
-    // Invalid Public key header, cancel the request.
-    if (base46EncodedPublicKey === null) {
-      return NSURLSessionAuthChallengeDisposition.CancelAuthenticationChallenge;
-    }
-
     const publicKeyDataWithANSIHeader = NSData.alloc().initWithBase64Encoding(base46EncodedPublicKey);
 
     // console.log('Hash => ', base46EncodedPublicKey);
@@ -351,7 +347,9 @@ function SessionDidReceiveAuthenticationChallengeBlock(session: NSURLSession, ch
     const publicKeyPinFromServerTrust =  hash.base64EncodedStringWithOptions(0);
 
     // Check if any pin matches the pins that were retrieved from APPROOV SDK
-    for (const approovPinsForDomainKey of approovPinsForDomain) {
+    // @ts-ignore
+    for (let j = 0; j < approovPinsForDomain.count; j++) {
+      const approovPinsForDomainKey = approovPinsForDomain.objectAtIndex(j);
       if (approovPinsForDomainKey === publicKeyPinFromServerTrust) {
         return NSURLSessionAuthChallengeDisposition.PerformDefaultHandling;
       }

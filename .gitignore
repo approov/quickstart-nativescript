@@ -8,6 +8,7 @@
 !src/approov-sdk-copy-config.js
 !src/approov-sdk-register-app.js
 !src/helpers.js
+!demo-vue/app/app.js
 src/**/*.map
 *.log
 *.ngsummary.json

@@ -5,13 +5,13 @@ import {
   HttpResponse,
   METHODS,
 } from './approov-sdk.common';
-import { isDefined } from '@nativescript/core/utils/types';
-import * as application from '@nativescript/core/application';
-import Approov = com.criticalblue.approovsdk.Approov;
+import { isDefined } from 'tns-core-modules/utils/types';
+import * as application from 'tns-core-modules/application';
+import * as applicationSettings from 'tns-core-modules/application-settings';
 import { Logger } from './logger';
-import TokenFetchResult = com.criticalblue.approovsdk.Approov.TokenFetchResult;
 import { NSApproovCommon } from './approov-sdk.common';
-import * as applicationSettings from '@nativescript/core/application-settings';
+import TokenFetchResult = com.criticalblue.approovsdk.Approov.TokenFetchResult;
+import Approov = com.criticalblue.approovsdk.Approov;
 import TokenFetchCallback = com.criticalblue.approovsdk.Approov.TokenFetchCallback;
 
 let okHttpClient: okhttp3.OkHttpClient;
@@ -21,8 +21,8 @@ export class NSApproov extends NSApproovCommon {
    * initialize the Approov SDK
    */
   static async initialize(initialConfigFileName: string = ApproovConstants.INITIAL_CONFIG): Promise<void> {
-    if (this.approovInitialized) {
-      Logger.warning('Approov SDK already initialized.');
+    if (this.isApproovInitialized()) {
+      Logger.info('Approov SDK already initialized.');
       return;
     }
     const initialConfig = await this.getInitialConfig(initialConfigFileName);
@@ -30,7 +30,6 @@ export class NSApproov extends NSApproovCommon {
     let dynamicConfig: string = NSApproov.getDynamicConfig();
 
     Approov.initialize(application.android.context, initialConfig, dynamicConfig, null);
-    Logger.info('Approov SDK initialized successfully.');
 
     // if we didn't have a dynamic configuration (after the first launch on the app) then
     // we fetch the latest and write it to local storage now
@@ -40,7 +39,8 @@ export class NSApproov extends NSApproovCommon {
 
     await this.applyCertificatePinning();
 
-    this.approovInitialized = true;
+    this.approovInitialized(true);
+    Logger.info('Approov SDK initialized successfully.');
   }
 
   /**
@@ -48,7 +48,7 @@ export class NSApproov extends NSApproovCommon {
    */
   static applyCertificatePinning(): void {
     okHttpClient = null;
-    Logger.info('TLS Pinning Reset');
+    Logger.info('SSL Pinning Reset');
   }
 
   /**
@@ -87,7 +87,7 @@ export class NSApproov extends NSApproovCommon {
     const dynamicConfig = Approov.fetchConfig();
     Logger.info('Dynamic config fetched successfully.');
     if (!dynamicConfig) {
-      return Logger.warning('Unable to fetch the dynamic config');
+      return Logger.info('Unable to fetch the dynamic config');
     }
 
     applicationSettings.setString(ApproovConstants.DYNAMIC_CONFIG, dynamicConfig);
