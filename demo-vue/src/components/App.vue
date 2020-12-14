@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     onHelloButtonTap() {
-      HttpModule.getJSON<any>({ // Comment when Using Approov
+      HttpModule.getJSON<any>({
         method: 'GET',
         url: HELLO_URL
       })

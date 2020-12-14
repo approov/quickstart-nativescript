@@ -9,7 +9,7 @@ import * as Observable from '@nativescript/core/data/observable';
 import * as HttpModule from '@nativescript/core/http';
 import { NSApproov } from 'ns-approov-sdk';
 
-const VERSION = 'v2';
+const VERSION = 'v1'; // Change To v2 when using Approov
 
 const HELLO_URL = `https://shapes.approov.io/${VERSION}/hello`;
 const SHAPE_URL = `https://shapes.approov.io/${VERSION}/shapes`;
@@ -38,7 +38,7 @@ export function navigatingTo(args: EventData) {
 
 export async function onHelloButtonTap() {
     try {
-        const response = await HttpModule.getJSON<any>({ // Comment when Using Approov
+        const response = await HttpModule.getJSON<any>({
             method: 'GET',
             url: HELLO_URL
         });
@@ -49,7 +49,7 @@ export async function onHelloButtonTap() {
         viewModel.set('imageUrl', '~/assets/hello.png');
     } catch (err) {
         console.log('HELLO API Error Response => ', err);
-        viewModel.set('message', JSON.stringify(err)) // `Error: ${err.statusCode}, Message: ${err.reason}`);
+        viewModel.set('message', JSON.stringify(err))
         viewModel.set('imageUrl', '~/assets/confused.png');
     }
 }
