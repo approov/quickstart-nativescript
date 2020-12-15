@@ -3,8 +3,8 @@ import { AppComponent } from './app.component';
 import { NativeScriptHttpClientModule, NativeScriptModule } from '@nativescript/angular';
 
 /* Uncomment for Approov */
-// import { ApproovSdkPinningHttpClientModule } from 'ns-approov-sdk/angular';
-// import { NSApproov } from 'ns-approov-sdk';
+// import { ApproovSdkPinningHttpClientModule } from '@approov/ns-approov-sdk/angular';
+// import { NSApproov } from '@approov/ns-approov-sdk';
 
 @NgModule({
   bootstrap: [

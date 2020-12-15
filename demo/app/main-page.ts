@@ -3,7 +3,7 @@ import * as Observable from '@nativescript/core/data/observable';
 import * as HttpModule from '@nativescript/core/http';
 
 /* Uncomment for Approov */
-// import { NSApproov } from 'ns-approov-sdk';
+// import { NSApproov } from '@approov/ns-approov-sdk';
 
 const VERSION = 'v1'; // Change to v2 for approov
 
