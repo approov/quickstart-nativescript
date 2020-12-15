@@ -20,7 +20,7 @@
 
 <script lang="ts">
 /* Uncomment for Approov */
-// import { NSApproov } from 'ns-approov-sdk';
+// import { NSApproov } from '@approov/ns-approov-sdk';
 
 import * as HttpModule from '@nativescript/core/http';
 
