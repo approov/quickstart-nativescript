@@ -29,8 +29,8 @@ There are actually two different versions of the plugin depending on whether you
 
 | NS Version | ns-approov-sdk version | Install command | Docs |
 | ---        | ---                       | ---             | --- |
-| ^7.0.0 | ^7.0.0 | ns plugin add @approov/ns-approov-sdk@^7.0.7 | [Here](https://github.com/approov/quickstart-nativescript/blob/main/QUICKSTART-README.md) |
-| ^6.0.0 | ^6.0.0 | tns plugin add @approov/ns-approov-sdk@^6.0.3 | [Here](https://github.com/approov/quickstart-nativescript/blob/ns-v6/QUICKSTART-README.md) |
+| ^7.0.0 | ^7.0.0 | ns plugin add @approov/ns-approov-sdk@^7 | [Here](https://github.com/approov/quickstart-nativescript/blob/main/QUICKSTART-README.md) |
+| ^6.0.0 | ^6.0.0 | tns plugin add @approov/ns-approov-sdk@^6 | [Here](https://github.com/approov/quickstart-nativescript/blob/ns-v6/QUICKSTART-README.md) |
 
 ## RUNNING THE SHAPES APP WITHOUT APPROOV
 
@@ -90,7 +90,7 @@ Open a shell terminal at `ns-approov-sdk/src` and type:
 npm i // or npm install
 ```
 
-Then, set up the demo to run, First navigate to the directory (demo-angular / demo-vue / demo)
+Then, set up the demo to run, First navigate to the directory (`demo-angular` / `demo-vue` / `demo`)
 
 ``` bash
 npm i
@@ -138,7 +138,7 @@ application will fail to build.
 Navigate to any of the three demo applications and run:
 
 ``` bash
-tns plugin add @approov/ns-approov-sdk@^7.0.7
+tns plugin add @approov/ns-approov-sdk@^7
 ```
 
 This will automatically install the plugin and add the necessary hooks to the application.
@@ -153,7 +153,7 @@ You will need to update the following file based on the demo you are running:
 /* Uncomment for Approov */
 
 ---------------------------------------------------------
-// For Angular demo update `ns-aproov-sdk/demo-angular/src/app/app.module.ts`
+// For Angular demo update `ns-approov-sdk/demo-angular/src/app/app.module.ts`
 
 /* Uncomment for Approov */
 
