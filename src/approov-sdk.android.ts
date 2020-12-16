@@ -257,7 +257,7 @@ async function fetchAndValidateApproovToken(url: string): Promise<string> {
     NSApproov.applyCertificatePinning();
   }
 
-  // check the Approov token fetch status
+  // get the Approov token status and immediately handle success
   const tokenStatus = approovToken.getStatus();
   Logger.info('Token Status => ', approovToken.getStatus());
   Logger.info('Loggable Token => ', approovToken.getLoggableToken());

@@ -23,19 +23,18 @@ relevant Quickstart guide available.
 
 ## STRUCTURE AND VERSION SUPPORT
 
-This repository contains both the source code for plugin published to `npm` (in `src`) and also the some examples in `demo` (TypeScript-NativeScript version), `demo-angular` and `demo-vue`. These demos do not initially use Approov, and the intructions here show you how to add in the Approov plugin from `npm` to use Approov. You can then follow the same procedure for your own apps.
+This repository contains both the source code for plugin published to `npm` (in `src`) and also the some examples in `demo-ts` (TypeScript version) and `demo-angular`. These demos do not initially use Approov, and the intructions here show you how to add in the Approov plugin from `npm` to use Approov. You can then follow the same procedure for your own apps.
 
 There are actually two different versions of the plugin depending on whether you are using the v7 or v6 version of NativeScript. The plugin source code is help in the banch `ns-v6` of this repo.
 
 | NS Version | ns-approov-sdk version | Install command | Docs |
 | ---        | ---                       | ---             | --- |
-| ^7.0.0 | ^7.0.0 | ns plugin add @approov/ns-approov-sdk@^7.0.7 | [Here](https://github.com/approov/quickstart-nativescript/blob/main/QUICKSTART-README.md) |
-| ^6.0.0 | ^6.0.0 | tns plugin add @approov/ns-approov-sdk@^6.0.3 | [Here](https://github.com/approov/quickstart-nativescript/blob/ns-v6/QUICKSTART-README.md) |
+| ^7.0.0 | ^7 | ns plugin add @approov/ns-approov-sdk@^7.0.7 | [Here](https://github.com/approov/quickstart-nativescript/blob/main/QUICKSTART-README.md) |
+| ^6.0.0 | ^6 | tns plugin add @approov/ns-approov-sdk@^6.0.3 | [Here](https://github.com/approov/quickstart-nativescript/blob/ns-v6/QUICKSTART-README.md) |
 
 ## RUNNING THE SHAPES APP WITHOUT APPROOV
 
-The Shapes App is a simple NativeScript application written in Javascript using the Angular, VueJS and
-TypeScript-NativeScript.
+The Shapes App is a simple NativeScript application written in Javascript using the Angular and TypeScript-NativeScript.
 
 <p>
     <img src="images/home.jpg" width="256" title="Shapes App">
@@ -90,7 +89,7 @@ Open a shell terminal at `ns-approov-sdk/src` and type:
 npm i // or npm install
 ```
 
-Then, set up the demo to run, First navigate to the directory (demo-angular / demo-vue / demo)
+Then, set up the demo to run, First navigate to the directory (`demo-angular` / `demo-ts`)
 
 ``` bash
 npm i
@@ -103,7 +102,6 @@ Then, to run on an Android Emulator (which must already be launched), open anoth
 ``` bash
 cd ns-approov-sdk/src
 npm run demo-angular.android // For Angular Demo
-npm run demo-vue.android  // For VueJS Demo
 npm run demo.android  // For {NS} Typescript Demo
 ``` 
 
@@ -112,7 +110,6 @@ Or to run on an iOS Simulator, type:
 ```
 cd ns-approov-sdk/src
 npm run demo-angular.ios  // For Angular Demo
-npm run demo-vue.ios  // For VueJS Demo
 npm run demo.ios  // For {NS} Typescript Demo
 ```
 
@@ -138,7 +135,7 @@ application will fail to build.
 Navigate to any of the three demo applications and run:
 
 ``` bash
-tns plugin add @approov/ns-approov-sdk@^6.0.3
+tns plugin add @approov/ns-approov-sdk@^6
 ```
 
 This will automatically install the plugin and add the necessary hooks to the application.
@@ -148,19 +145,15 @@ This will automatically install the plugin and add the necessary hooks to the ap
 You will need to update the following file based on the demo you are running:
 
 ``` ts
-// For demo update `ns-approov-sdk/demo/app/main-page.ts`
+// For demo update `ns-approov-sdk/demo-ts/app/main-page.ts`
 
 /* Uncomment for Approov */
 
 ---------------------------------------------------------
-// For Angular demo update `ns-aproov-sdk/demo-angular/src/app/app.module.ts`
+// For Angular demo update `ns-approov-sdk/demo-angular/src/app/app.module.ts`
 
 /* Uncomment for Approov */
 
----------------------------------------------------------
-// For VueJS demo update `ns-aproov-sdk/demo-vue/src/main.ts`
-
-/* Uncomment for Approov */
 ```
 
 In order to enable Approov support in the Shapes app, the above mentioned block of code must be uncommented. Specifically, the code
@@ -178,8 +171,7 @@ import { NSApproov } from '@approov/ns-approov-sdk';
 NSApproov.setApproovHeader('shapes.approov.io', { token: 'Approov-Token', binding: 'Authorization' });
 
 // demo-angular/src/app/app.module.ts (Angular)
-// demo-vue/src/main.ts               (VueJS)
-// demo/app/main-page.ts              (Plain TypeScript)
+// demo-ts/app/main-page.ts           (Plain TypeScript)
 ```
 
 ### Select the Correct Shapes Endpoint
@@ -194,10 +186,7 @@ Now that we’re using Approov, let’s switch to use version 2 of the Shapes AP
   // demo-angular/src/app/app.component.ts
   readonly VERSION = 'v1'; // Change To v2 when using Approov
   
-  // demo-vue/src/components/App.vue
-  const VERSION = 'v1'; // use v2 for Approov
-  
-  // demo/app/main-page.ts
+  // demo-ts/app/main-page.ts
   const VERSION = 'v1';
 ```
 
@@ -246,13 +235,11 @@ using:
 
 ``` bash
     // Android
-    approov registration -add demo-vue/platforms/android/app/build/outputs/apk/<debug|release>/app-<debug|release>.apk
-    approov registration -add demo/platforms/android/app/build/outputs/apk/<debug|release>/app-<debug|release>.apk
+    approov registration -add demo-ts/platforms/android/app/build/outputs/apk/<debug|release>/app-<debug|release>.apk
     approov registration -add demo-angular/platforms/android/app/build/outputs/apk/<debug|release>/app-<debug|release>.apk
     
     // IOS
-    approov registration -add demo-vue/platforms/ios/build/Debug-iphonesimulator/demo-vue.ipa
-    approov registration -add demo/platforms/ios/build/Debug-iphonesimulator/demo.ipa
+    approov registration -add demo-ts/platforms/ios/build/Debug-iphonesimulator/demo.ipa
     approov registration -add demo-angular/platforms/ios/build/Debug-iphonesimulator/demo-angular.ipa
     
     The application / IPA is only registered in the first build. Subsequent build will not be registered automatically. 
@@ -264,7 +251,7 @@ service, untempered apps will attest successfully and begin to fetch and transmi
 
 If you plan to submit your application to the app store, you must remove the Intel CPU simulator support architectures
 from the Approov binary before submitting your app. To do so, at the
-directory `demo-<vue | angular>/node_modules/ns-approov-sdk/platforms/ios/Approov.framework` using the command line:
+directory `demo-<ts | angular>/node_modules/ns-approov-sdk/platforms/ios/Approov.framework` using the command line:
 
 ``` bash
 lipo Approov -remove i386 -output Approov
@@ -276,8 +263,7 @@ plugin will automatically add it during next application build.
 
 ``` bash
 rm -rf demo-angular/node_modules/ns-approov-sdk/platforms/ios/Approov.framework
-rm -rf demo-vue/node_modules/ns-approov-sdk/platforms/ios/Approov.framework
-rm -rf demo/node_modules/ns-approov-sdk/platforms/ios/Approov.framework
+rm -rf demo-ts/node_modules/ns-approov-sdk/platforms/ios/Approov.framework
 ```
 
 ## RUNNING THE SHAPES APP WITH APPROOV

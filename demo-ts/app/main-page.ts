@@ -7,9 +7,11 @@ logic, and to set up your page’s data binding.
 import { EventData, Page } from '@nativescript/core';
 import * as Observable from '@nativescript/core/data/observable';
 import * as HttpModule from '@nativescript/core/http';
-import { NSApproov } from 'ns-approov-sdk';
 
-const VERSION = 'v1'; // Change To v2 when using Approov
+/* uncomment for Approov */
+// import { NSApproov } from '@approov/ns-approov-sdk';
+
+const VERSION = 'v1'; // change to v2 for Approov
 
 const HELLO_URL = `https://shapes.approov.io/${VERSION}/hello`;
 const SHAPE_URL = `https://shapes.approov.io/${VERSION}/shapes`;
@@ -25,7 +27,9 @@ export function navigatingTo(args: EventData) {
     https://docs.nativescript.org/api-reference/classes/_ui_page_.page.html
     */
     const page = <Page>args.object;
-    NSApproov.initialize();
+
+    /* uncomment for Approov */
+    // NSApproov.initialize();
 
     viewModel = Observable.fromObject({
         imageUrl: '~/assets/approov.png',
@@ -38,7 +42,7 @@ export function navigatingTo(args: EventData) {
 
 export async function onHelloButtonTap() {
     try {
-        const response = await HttpModule.getJSON<any>({
+        const response = await HttpModule.getJSON<any>({ 
             method: 'GET',
             url: HELLO_URL
         });
@@ -56,18 +60,18 @@ export async function onHelloButtonTap() {
 
 export async function onShapeButtonTap() {
     try {
-        // const response = await HttpModule.getJSON<any>({ // Comment when Using Approov
-        //     method: 'GET',
-        //     url: SHAPE_URL
-        // });
+        const response = await HttpModule.getJSON<any>({ // Comment when Using Approov
+             method: 'GET',
+             url: SHAPE_URL
+        });
 
         /* Uncomment for Approov */
 
-        const response = await NSApproov.request({
-          method: 'GET',
-          url: SHAPE_URL
-        }).then((resp) => resp.content);
-        console.log('Shapes API Success Response => ', response);
+        // const response = await NSApproov.request({
+        //  method: 'GET',
+        //   url: SHAPE_URL
+        // }).then((resp) => resp.content);
+        // console.log('Shapes API Success Response => ', response);
 
         viewModel.set('message', response.status);
         viewModel.set('imageUrl', `~/assets/${response.shape.toLowerCase()}.png`);
