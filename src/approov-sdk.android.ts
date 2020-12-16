@@ -253,13 +253,11 @@ async function fetchAndValidateApproovToken(url: string): Promise<string> {
   // update any dynamic configuration
   if (approovToken.isConfigChanged()) {
     NSApproov.saveDynamicConfig();
-  }
-
-  if (approovToken.isForceApplyPins()) {
     Logger.info('Applying Pinning again');
     NSApproov.applyCertificatePinning();
   }
 
+  // check the Approov token fetch status
   const tokenStatus = approovToken.getStatus();
   Logger.info('Token Status => ', approovToken.getStatus());
   Logger.info('Loggable Token => ', approovToken.getLoggableToken());
