@@ -29,8 +29,8 @@ There are actually two different versions of the plugin depending on whether you
 
 | NS Version | ns-approov-sdk version | Install command | Docs |
 | ---        | ---                       | ---             | --- |
-| ^7.0.0 | ^7.0.0 | ns plugin add @approov/ns-approov-sdk@^7.0.6 | [Here](https://github.com/approov/quickstart-nativescript/blob/main/QUICKSTART-README.md) |
-| ^6.0.0 | ^6.0.0 | tns plugin add @approov/ns-approov-sdk@^6.0.2 | [Here](https://github.com/approov/quickstart-nativescript/blob/ns-v6/QUICKSTART-README.md) |
+| ^7.0.0 | ^7.0.0 | ns plugin add @approov/ns-approov-sdk@^7.0.7 | [Here](https://github.com/approov/quickstart-nativescript/blob/main/QUICKSTART-README.md) |
+| ^6.0.0 | ^6.0.0 | tns plugin add @approov/ns-approov-sdk@^6.0.3 | [Here](https://github.com/approov/quickstart-nativescript/blob/ns-v6/QUICKSTART-README.md) |
 
 ## RUNNING THE SHAPES APP WITHOUT APPROOV
 
@@ -128,9 +128,9 @@ Now grab a shape and enjoy the endless family fun!
 
 ## ADDING APPROOV SUPPORT
 
-### Add the Latest Approov SDK
+### Prerequisites
 
-Before proceeding further make sure you have Approov cli installed and APPROOV_MANAGEMENT_TOKEN set up, otherwise the
+Before proceeding further make sure you have `approov` CLI installed and `APPROOV_MANAGEMENT_TOKEN` set up, otherwise the
 application will fail to build.
 
 ### Require the Approov NativeScript Package
@@ -138,14 +138,10 @@ application will fail to build.
 Navigate to any of the three demo applications and run:
 
 ``` bash
-tns plugin add @approov/ns-approov-sdk@^7.0.6
+tns plugin add @approov/ns-approov-sdk@^7.0.7
 ```
 
 This will automatically install the plugin and add the necessary hooks to the application.
-
-### Add Approov Native Module
-
-Approov protection is provided through this [quickstart-nativescript](https://github.com/approov/quickstart-nativescript) module for both Android and iOS mobile platforms.
 
 ### Enable Approov Support in the App
 
