@@ -105,7 +105,7 @@
   },
   "dependencies": {
     "fs-extra": "9.0.1",
-    "@nativescript/hooks": "2.0.0"
+    "@nativescript/hook": "2.0.0"
   },
   "bootstrapper": "nativescript-plugin-seed"
 }
