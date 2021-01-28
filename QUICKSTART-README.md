@@ -7,10 +7,8 @@ relevant Quickstart guide available.
 ## WHAT YOU WILL NEED
 
 * This branch is tested with NodeJS version 14. So please make sure you are using Node v14 before proceeding.
-* Access to either the demo account ([request access here](https://info.approov.io/demo-token)) or a trial/paid Approov
-  account
-* The `approov` command line tool [installed](https://approov.io/docs/latest/approov-installation/)
-  with `APPROOV_MANAGEMENT_TOKEN` set with your account access token
+* Access to a trial or paid Approov account
+* The `approov` command line tool [installed](https://approov.io/docs/latest/approov-installation/) with access to your account
 * The contents of the folder containing this README
 
 ## WHAT YOU WILL LEARN
@@ -130,8 +128,7 @@ Now grab a shape and enjoy the endless family fun!
 
 ### Prerequisites
 
-Before proceeding further make sure you have `approov` CLI installed and `APPROOV_MANAGEMENT_TOKEN` set up, otherwise the
-application will fail to build.
+Before proceeding further make sure you have `approov` CLI installed otherwise the application will fail to build.
 
 ### Require the Approov NativeScript Package
 
