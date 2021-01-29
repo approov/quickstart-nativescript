@@ -344,18 +344,19 @@ other Approov features:
   determines the conditions under which an app will be given a valid Approov token.
 * Learn how to [Manage Devices](https://approov.io/docs/latest/approov-usage-documentation/#managing-devices) that
   allows you to change the policies on specific devices.
-* Understand how to issue and revoke your
-  own [Management Tokens](https://approov.io/docs/latest/approov-usage-documentation/#management-tokens) to control
-  access to your Approov account.
+* Understand how to provide access for other [Users](https://approov.io/docs/latest/approov-usage-documentation/#user-management) 
+  of your Approov account.
 * Use the [Metrics Graphs](https://approov.io/docs/latest/approov-usage-documentation/#metrics-graphs) to see live and
   accumulated metrics of devices using your account and any reasons for devices being rejected and not being provided
   with valid Approov tokens. You can also see your billing usage which is based on the total number of unique devices
   using your account each month.
 * Use [Service Monitoring](https://approov.io/docs/latest/approov-usage-documentation/#service-monitoring) emails to
   receive monthly (or, optionally, daily) summaries of your Approov usage.
+* Learn about [automated approov CLI usage](https://approov.io/docs/latest/approov-usage-documentation/#automated-approov-cli-usage).
 * Investigate other advanced features, such
-  as [Offline Security Mode](https://approov.io/docs/latest/approov-usage-documentation/#offline-security-mode)
-  , [DeviceCheck Integration](https://approov.io/docs/latest/approov-usage-documentation/#apple-devicecheck-integration)
+  as [Offline Security Mode](https://approov.io/docs/latest/approov-usage-documentation/#offline-security-mode),
+  [DeviceCheck Integration](https://approov.io/docs/latest/approov-usage-documentation/#apple-devicecheck-integration),
+  [SafetyNet Integration](https://approov.io/docs/latest/approov-usage-documentation/#google-safetynet-integration),
   and [Android Automated Launch Detection](https://approov.io/docs/latest/approov-usage-documentation/#android-automated-launch-detection)
   .
 
