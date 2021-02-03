@@ -23,7 +23,7 @@ relevant Quickstart guide available.
 
 This repository contains both the source code for plugin published to `npm` (in `src`) and also the some examples in `demo` (TypeScript-NativeScript version), `demo-angular` and `demo-vue`. These demos do not initially use Approov, and the intructions here show you how to add in the Approov plugin from `npm` to use Approov. You can then follow the same procedure for your own apps.
 
-There are actually two different versions of the plugin depending on whether you are using the v7 or v6 version of NativeScript. The plugin source code is help in the banch `ns-v6` of this repo.
+There are actually two different versions of the plugin depending on whether you are using the v7 or v6 version of NativeScript. The plugin source code is held in the banch `ns-v6` of this repo.
 
 | NS Version | ns-approov-sdk version | Install command | Docs |
 | ---        | ---                       | ---             | --- |
@@ -82,7 +82,7 @@ Please make sure you are using Node v14 and not v15 because v15 has issue in Nat
   copies hooks that are required by the plugin.
 </mark>
 
-Open a shell terminal at `ns-approov-sdk/src` and type:
+Open a shell terminal at `quickstart-nativescript/src` and type:
 
 ``` bash
 npm i // or npm install
@@ -99,7 +99,7 @@ This will install all the necessary packages and add the hooks to automatically 
 Then, to run on an Android Emulator (which must already be launched), open another terminal window and type:
 
 ``` bash
-cd ns-approov-sdk/src
+cd quickstart-nativescript/src
 npm run demo-angular.android // For Angular Demo
 npm run demo-vue.android  // For VueJS Demo
 npm run demo.android  // For {NS} Typescript Demo
@@ -108,7 +108,7 @@ npm run demo.android  // For {NS} Typescript Demo
 Or to run on an iOS Simulator, type:
 
 ```
-cd ns-approov-sdk/src
+cd quickstart-nativescript/src
 npm run demo-angular.ios  // For Angular Demo
 npm run demo-vue.ios  // For VueJS Demo
 npm run demo.ios  // For {NS} Typescript Demo
@@ -145,12 +145,12 @@ This will automatically install the plugin and add the necessary hooks to the ap
 You will need to update the following file based on the demo you are running:
 
 ``` ts
-// For demo update `ns-approov-sdk/demo/app/main-page.ts`
+// For demo update `quickstart-nativescript/demo/app/main-page.ts`
 
 /* Uncomment for Approov */
 
 ---------------------------------------------------------
-// For Angular demo update `ns-approov-sdk/demo-angular/src/app/app.module.ts`
+// For Angular demo update `quickstart-nativescript/demo-angular/src/app/app.module.ts`
 
 /* Uncomment for Approov */
 
@@ -403,6 +403,6 @@ npm i --save-dev nativescript-dev-webpack@next
 ./node_modules/.bin/update-ns-webpack --configs
 ```
 
-After this you can run `npm run demo.ios` from `ns-approov-sdk/src`
+After this you can run `npm run demo.ios` from `quickstart-nativescript/src`
 Or,
 You can also run `tns run ios --no-hmr --device` directly inside the demo you are in.
