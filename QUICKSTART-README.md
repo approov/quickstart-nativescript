@@ -106,19 +106,15 @@ cd quickstart-nativescript/(`demo-angular` or `demo-vue` or `demo`)
 tns run android
 ``` 
 
-Or to run on an iOS Simulator, type:
+Or if you are in a Mac, before attempting to run on an iOS device please check the codesigning identity you will use when deploying application and take a note of the desired [`TeamId`](https://support.customchurchapps.com/hc/en-us/articles/360038612853-Locating-your-Apple-Team-ID). Once you have found out the 10 digit `TeamID` you can either edit the `xcconfig` template for the project and replace the existing one with yours or use the command line option `--teamId`. If you choose to edit the file `quickstart-nativescript/(demo-angular or demo-vue or demo)/app/App_Resources/iOS/build.xcconfig` and modify the line `DEVELOPMENT_TEAM = XXXXXXXXXX` with the desired TeamID the change will remain valid regardless of how many times you rebuild the demo app.
+
+ Now build and run the iOS app by entering the following command:
 
 ``` bash
 cd quickstart-nativescript/(`demo-angular` or `demo-vue` or `demo`)
 tns run ios
-```
-
-It is also possible to run the app on a real device by passing the `--device` flag to the command above. Example
-
-``` bash
-npm run demo-angular.android -- --device
-                    or
-npm run demo-angular.android -- --emulator // (To run on emulator)
+    # or if you would like to provide TeamID on command line
+tns run ios --teamId XXXXXXXXXX (This is your 10 character Team ID)
 ```
 
 Now grab a shape and enjoy the endless family fun!
