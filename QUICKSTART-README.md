@@ -10,6 +10,9 @@ relevant Quickstart guide available.
 * Access to a trial or paid Approov account
 * The `approov` command line tool [installed](https://approov.io/docs/latest/approov-installation/) with access to your account
 * The contents of the folder containing this README
+* [`Xcode`](https://developer.apple.com/xcode/) if you would like to build the iOS samples (version 12.3 used in this guide) and a real iOS device since the Approov SDK allows using a simulator but will ONLY authenticate a real iOS device
+* [`NativeScript`](https://docs.nativescript.org/) either version 6 or 7 (6.x and 7.2 used in this guide)
+* [`Android Studio`](https://developer.android.com/studio) if you would like to follow the Android examples (version 4.1.2 used)
 
 ## WHAT YOU WILL LEARN
 
@@ -99,19 +102,15 @@ This will install all the necessary packages and add the hooks to automatically 
 Then, to run on an Android Emulator (which must already be launched), open another terminal window and type:
 
 ``` bash
-cd quickstart-nativescript/src
-npm run demo-angular.android // For Angular Demo
-npm run demo-vue.android  // For VueJS Demo
-npm run demo.android  // For {NS} Typescript Demo
+cd quickstart-nativescript/(`demo-angular` or `demo-vue` or `demo`)
+tns run android
 ``` 
 
 Or to run on an iOS Simulator, type:
 
-```
-cd quickstart-nativescript/src
-npm run demo-angular.ios  // For Angular Demo
-npm run demo-vue.ios  // For VueJS Demo
-npm run demo.ios  // For {NS} Typescript Demo
+``` bash
+cd quickstart-nativescript/(`demo-angular` or `demo-vue` or `demo`)
+tns run ios
 ```
 
 It is also possible to run the app on a real device by passing the `--device` flag to the command above. Example
