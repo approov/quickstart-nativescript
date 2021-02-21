@@ -130,10 +130,20 @@ Before proceeding further make sure you have `approov` CLI installed otherwise t
 Navigate to any of the three demo applications and run:
 
 ``` bash
-tns plugin add @approov/ns-approov-sdk@^7
+tns plugin add @approov/ns-approov-sdk@^8
 ```
 
-This will automatically install the plugin and add the necessary hooks to the application.
+This will automatically install the plugin and add the necessary hooks to the application. Next you will need to generate the iOS or Android projects, download the Approov SDK and the [configuration file](https://approov.io/docs/latest/approov-usage-documentation/#sdk-configuration) required to initialize the SDK. To achieve so you need to execute a single command:
+
+``` bash
+cd quickstart-nativescript/(`demo-angular` or `demo-vue` or `demo`)
+# If targetting iOS
+tns prepare ios
+# If targetting Android
+tns prepare android
+```
+
+NOTE: Make sure Approov CLI is set up properly.
 
 ### Enable Approov Support in the App
 
@@ -211,29 +221,16 @@ approov api -add shapes.approov.io
 Tokens for this domain will be automatically signed with the specific secret for this domain, rather than the normal one
 for your account.
 
-### Setup an Initial Approov Configuration
-
-An Approov-enabled app requires
-a [configuration file](https://approov.io/docs/latest/approov-usage-documentation/#sdk-configuration) to initialize it.
-The Approov configuration is updated dynamically after subsequent launches of the app. When we run the NativeScript
-application that uses NativeScript Approov Plugin the initial configuration is already added to the platform assets
-before install.
-
-NOTE: Make sure Approov CLI is set up properly.
-
 ## REGISTER YOUR APP WITH APPROOV
 
-If you are running the application using NativeScript CLI `tns run <ios | android>`. The plugin will automatically
-register the APK / IPA before installing it on device.
-
-Note: Subsequent (Incremental) IOS builds will not be registered with Approov in IOS.
+In order for the Approov SDK authentication to work you will have to register it with the remote service using the `appproov` command line tools.
 
 Warning: Never log tokens in a released app as this could permit hackers to harvest data from your API while the token
 has not expired! Always
 use _[loggable](https://www.approov.io/docs/latest/approov-usage-documentation/#loggable-tokens)_ Approov tokens for
 debugging.
 
-If you are building a release / debug build using `tns build <ios | android>`. You have to register it manually
+Regardless if you are building a release / debug build using `tns build <ios | android>` or if you are running the application using NativeScript CLI `tns run <ios | android>` you have to register it manually
 using:
 
 ``` bash
@@ -253,24 +250,6 @@ using:
 Although the application is now receiving and forwarding tokens with your API calls, the tokens are not yet properly
 signed, because the attestation service does not recognize your application. Once you register the app with the Approov
 service, untempered apps will attest successfully and begin to fetch and transmit valid tokens.
-
-If you plan to submit your application to the app store, you must remove the Intel CPU simulator support architectures
-from the Approov binary before submitting your app. To do so, at the
-directory `demo-<vue | angular>/node_modules/ns-approov-sdk/platforms/ios/Approov.framework` using the command line:
-
-``` bash
-lipo Approov -remove i386 -output Approov
-lipo Approov -remove x86_64 -output Approov
-```
-
-Since executing the above commands will disable support for the iOS Simulator, you can just remove the directory and the
-plugin will automatically add it during next application build.
-
-``` bash
-rm -rf demo-angular/node_modules/ns-approov-sdk/platforms/ios/Approov.framework
-rm -rf demo-vue/node_modules/ns-approov-sdk/platforms/ios/Approov.framework
-rm -rf demo/node_modules/ns-approov-sdk/platforms/ios/Approov.framework
-```
 
 ## RUNNING THE SHAPES APP WITH APPROOV
 
