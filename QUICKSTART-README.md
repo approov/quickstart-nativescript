@@ -130,7 +130,7 @@ Before proceeding further make sure you have `approov` CLI installed otherwise t
 Navigate to any of the three demo applications and run:
 
 ``` bash
-tns plugin add @approov/ns-approov-sdk@^8
+tns plugin add @approov/ns-approov-sdk@^7
 ```
 
 This will automatically install the plugin and add the necessary hooks to the application. Next you will need to generate the iOS or Android projects, download the Approov SDK and the [configuration file](https://approov.io/docs/latest/approov-usage-documentation/#sdk-configuration) required to initialize the SDK. To achieve so you need to execute a single command:
