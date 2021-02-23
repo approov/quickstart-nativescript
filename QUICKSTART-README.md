@@ -377,6 +377,4 @@ npm i --save-dev nativescript-dev-webpack@next
 ./node_modules/.bin/update-ns-webpack --configs
 ```
 
-After this you can run `npm run demo.ios` from `quickstart-nativescript/src`
-Or,
-You can also run `tns run ios --no-hmr --device` directly inside the demo you are in.
+You can then run `tns run ios --no-hmr --device` directly inside the demo you are in.
