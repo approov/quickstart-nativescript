@@ -7,11 +7,12 @@ relevant Quickstart guide available.
 ## WHAT YOU WILL NEED
 
 * This branch is tested with NodeJS version 14. So please make sure you are using Node v14 before proceeding.
-* Access to either the demo account ([request access here](https://info.approov.io/demo-token)) or a trial/paid Approov
-  account
-* The `approov` command line tool [installed](https://approov.io/docs/latest/approov-installation/)
-  with `APPROOV_MANAGEMENT_TOKEN` set with your account access token
+* Access to a trial or paid Approov account
+* The `approov` command line tool [installed](https://approov.io/docs/latest/approov-installation/) with access to your account
 * The contents of the folder containing this README
+* [`Xcode`](https://developer.apple.com/xcode/) if you would like to build the iOS samples (version 12.3 used in this guide) and a real iOS device since the Approov SDK allows using a simulator but will ONLY authenticate a real iOS device
+* [`NativeScript`](https://docs.nativescript.org/) either version 6 or 7 (6.7.6 and 7.2.0 used in this guide)
+* [`Android Studio`](https://developer.android.com/studio) if you would like to follow the Android examples (version 4.1.2 used)
 
 ## WHAT YOU WILL LEARN
 
@@ -23,9 +24,9 @@ relevant Quickstart guide available.
 
 ## STRUCTURE AND VERSION SUPPORT
 
-This repository contains both the source code for plugin published to `npm` (in `src`) and also the some examples in `demo-ts` (TypeScript version) and `demo-angular`. These demos do not initially use Approov, and the intructions here show you how to add in the Approov plugin from `npm` to use Approov. You can then follow the same procedure for your own apps.
+This repository contains both the source code for plugin published to `npm` (in `src`) and also the some examples in `demo` (TypeScript-NativeScript version), `demo-angular` and `demo-vue`. These demos do not initially use Approov, and the intructions here show you how to add in the Approov plugin from `npm` to use Approov. You can then follow the same procedure for your own apps.
 
-There are actually two different versions of the plugin depending on whether you are using the v7 or v6 version of NativeScript. The plugin source code is help in the banch `ns-v6` of this repo.
+There are actually two different versions of the plugin depending on whether you are using the v7 or v6 version of NativeScript. The plugin source code is held in the banch `ns-v6` of this repo.
 
 | NS Version | ns-approov-sdk version | Install command | Docs |
 | ---        | ---                       | ---             | --- |
@@ -34,7 +35,8 @@ There are actually two different versions of the plugin depending on whether you
 
 ## RUNNING THE SHAPES APP WITHOUT APPROOV
 
-The Shapes App is a simple NativeScript application written in Javascript using the Angular and TypeScript-NativeScript.
+The Shapes App is a simple NativeScript application written in Javascript using the Angular, VueJS and
+TypeScript-NativeScript.
 
 <p>
     <img src="images/home.jpg" width="256" title="Shapes App">
@@ -83,7 +85,7 @@ Please make sure you are using Node v14 and not v15 because v15 has issue in Nat
   copies hooks that are required by the plugin.
 </mark>
 
-Open a shell terminal at `ns-approov-sdk/src` and type:
+Open a shell terminal at `quickstart-nativescript/src` and type:
 
 ``` bash
 npm i // or npm install
@@ -100,25 +102,19 @@ This will install all the necessary packages and add the hooks to automatically 
 Then, to run on an Android Emulator (which must already be launched), open another terminal window and type:
 
 ``` bash
-cd ns-approov-sdk/src
-npm run demo-angular.android // For Angular Demo
-npm run demo.android  // For {NS} Typescript Demo
+cd quickstart-nativescript/(`demo-angular` or `demo-ts`)
+tns run android
 ``` 
 
-Or to run on an iOS Simulator, type:
+Or if you are in a Mac, before attempting to run on an iOS device please check the codesigning identity you will use when deploying application and take a note of the desired [`TeamId`](https://support.customchurchapps.com/hc/en-us/articles/360038612853-Locating-your-Apple-Team-ID). Once you have found out the 10 digit `TeamID` you can either edit the `xcconfig` template for the project and replace the existing one with yours or use the command line option `--teamId`. If you choose to edit the file `quickstart-nativescript/(demo-angular or demo-vue or demo)/app/App_Resources/iOS/build.xcconfig` and modify the line `DEVELOPMENT_TEAM = XXXXXXXXXX` with the desired TeamID the change will remain valid regardless of how many times you rebuild the demo app.
 
-```
-cd ns-approov-sdk/src
-npm run demo-angular.ios  // For Angular Demo
-npm run demo.ios  // For {NS} Typescript Demo
-```
-
-It is also possible to run the app on a real device by passing the `--device` flag to the command above. Example
+ Now build and run the iOS app by entering the following command:
 
 ``` bash
-npm run demo-angular.android -- --device
-                    or
-npm run demo-angular.android -- --emulator // (To run on emulator)
+cd quickstart-nativescript/(`demo-angular` or `demo-ts`)
+tns run ios
+    # or if you would like to provide TeamID on command line
+tns run ios --teamId XXXXXXXXXX (This is your 10 character Team ID)
 ```
 
 Now grab a shape and enjoy the endless family fun!
@@ -127,30 +123,39 @@ Now grab a shape and enjoy the endless family fun!
 
 ### Prerequisites
 
-Before proceeding further make sure you have `approov` CLI installed and `APPROOV_MANAGEMENT_TOKEN` set up, otherwise the
-application will fail to build.
+Before proceeding further make sure you have `approov` CLI installed otherwise the application will fail to build.
 
 ### Require the Approov NativeScript Package
 
 Navigate to any of the three demo applications and run:
 
 ``` bash
-tns plugin add @approov/ns-approov-sdk@^6
+tns plugin add @approov/ns-approov-sdk@^7
 ```
 
-This will automatically install the plugin and add the necessary hooks to the application.
+This will automatically install the plugin and add the necessary hooks to the application. Next you will need to generate the iOS or Android projects, download the Approov SDK and the [configuration file](https://approov.io/docs/latest/approov-usage-documentation/#sdk-configuration) required to initialize the SDK. To achieve so you need to execute a single command:
+
+``` bash
+cd quickstart-nativescript/(`demo-angular` or `demo-ts`)
+# If targetting iOS
+tns prepare ios
+# If targetting Android
+tns prepare android
+```
+
+NOTE: Make sure Approov CLI is set up properly.
 
 ### Enable Approov Support in the App
 
 You will need to update the following file based on the demo you are running:
 
 ``` ts
-// For demo update `ns-approov-sdk/demo-ts/app/main-page.ts`
+// For demo update `quickstart-nativescript/demo-ts/app/main-page.ts`
 
 /* Uncomment for Approov */
 
 ---------------------------------------------------------
-// For Angular demo update `ns-approov-sdk/demo-angular/src/app/app.module.ts`
+// For Angular demo update `quickstart-nativescript/demo-angular/src/app/app.module.ts`
 
 /* Uncomment for Approov */
 
@@ -186,7 +191,10 @@ Now that we’re using Approov, let’s switch to use version 2 of the Shapes AP
   // demo-angular/src/app/app.component.ts
   readonly VERSION = 'v1'; // Change To v2 when using Approov
   
-  // demo-ts/app/main-page.ts
+  // demo-vue/src/components/App.vue
+  const VERSION = 'v1'; // use v2 for Approov
+  
+  // demo/app/main-page.ts
   const VERSION = 'v1';
 ```
 
@@ -208,29 +216,16 @@ approov api -add shapes.approov.io
 Tokens for this domain will be automatically signed with the specific secret for this domain, rather than the normal one
 for your account.
 
-### Setup an Initial Approov Configuration
-
-An Approov-enabled app requires
-a [configuration file](https://approov.io/docs/latest/approov-usage-documentation/#sdk-configuration) to initialize it.
-The Approov configuration is updated dynamically after subsequent launches of the app. When we run the NativeScript
-application that uses NativeScript Approov Plugin the initial configuration is already added to the platform assets
-before install.
-
-NOTE: Make sure Approov CLI is set up properly.
-
 ## REGISTER YOUR APP WITH APPROOV
 
-If you are running the application using NativeScript CLI `tns run <ios | android>`. The plugin will automatically
-register the APK / IPA before installing it on device.
-
-Note: Subsequent (Incremental) IOS builds will not be registered with Approov in IOS.
+In order for the Approov SDK authentication to work you will have to register it with the remote service using the `appproov` command line tools.
 
 Warning: Never log tokens in a released app as this could permit hackers to harvest data from your API while the token
 has not expired! Always
 use _[loggable](https://www.approov.io/docs/latest/approov-usage-documentation/#loggable-tokens)_ Approov tokens for
 debugging.
 
-If you are building a release / debug build using `tns build <ios | android>`. You have to register it manually
+Regardless if you are building a release / debug build using `tns build <ios | android>` or if you are running the application using NativeScript CLI `tns run <ios | android>` you have to register it manually
 using:
 
 ``` bash
@@ -248,23 +243,6 @@ using:
 Although the application is now receiving and forwarding tokens with your API calls, the tokens are not yet properly
 signed, because the attestation service does not recognize your application. Once you register the app with the Approov
 service, untempered apps will attest successfully and begin to fetch and transmit valid tokens.
-
-If you plan to submit your application to the app store, you must remove the Intel CPU simulator support architectures
-from the Approov binary before submitting your app. To do so, at the
-directory `demo-<ts | angular>/node_modules/ns-approov-sdk/platforms/ios/Approov.framework` using the command line:
-
-``` bash
-lipo Approov -remove i386 -output Approov
-lipo Approov -remove x86_64 -output Approov
-```
-
-Since executing the above commands will disable support for the iOS Simulator, you can just remove the directory and the
-plugin will automatically add it during next application build.
-
-``` bash
-rm -rf demo-angular/node_modules/ns-approov-sdk/platforms/ios/Approov.framework
-rm -rf demo-ts/node_modules/ns-approov-sdk/platforms/ios/Approov.framework
-```
 
 ## RUNNING THE SHAPES APP WITH APPROOV
 
@@ -333,18 +311,19 @@ other Approov features:
   determines the conditions under which an app will be given a valid Approov token.
 * Learn how to [Manage Devices](https://approov.io/docs/latest/approov-usage-documentation/#managing-devices) that
   allows you to change the policies on specific devices.
-* Understand how to issue and revoke your
-  own [Management Tokens](https://approov.io/docs/latest/approov-usage-documentation/#management-tokens) to control
-  access to your Approov account.
+* Understand how to provide access for other [Users](https://approov.io/docs/latest/approov-usage-documentation/#user-management) 
+  of your Approov account.
 * Use the [Metrics Graphs](https://approov.io/docs/latest/approov-usage-documentation/#metrics-graphs) to see live and
   accumulated metrics of devices using your account and any reasons for devices being rejected and not being provided
   with valid Approov tokens. You can also see your billing usage which is based on the total number of unique devices
   using your account each month.
 * Use [Service Monitoring](https://approov.io/docs/latest/approov-usage-documentation/#service-monitoring) emails to
   receive monthly (or, optionally, daily) summaries of your Approov usage.
+* Learn about [automated approov CLI usage](https://approov.io/docs/latest/approov-usage-documentation/#automated-approov-cli-usage).
 * Investigate other advanced features, such
-  as [Offline Security Mode](https://approov.io/docs/latest/approov-usage-documentation/#offline-security-mode)
-  , [DeviceCheck Integration](https://approov.io/docs/latest/approov-usage-documentation/#apple-devicecheck-integration)
+  as [Offline Security Mode](https://approov.io/docs/latest/approov-usage-documentation/#offline-security-mode),
+  [DeviceCheck Integration](https://approov.io/docs/latest/approov-usage-documentation/#apple-devicecheck-integration),
+  [SafetyNet Integration](https://approov.io/docs/latest/approov-usage-documentation/#google-safetynet-integration),
   and [Android Automated Launch Detection](https://approov.io/docs/latest/approov-usage-documentation/#android-automated-launch-detection)
   .
 
@@ -391,6 +370,4 @@ npm i --save-dev nativescript-dev-webpack@next
 ./node_modules/.bin/update-ns-webpack --configs
 ```
 
-After this you can run `npm run demo.ios` from `ns-approov-sdk/src`
-Or,
-You can also run `tns run ios --no-hmr --device` directly inside the demo you are in.
+You can then run `tns run ios --no-hmr --device` directly inside the demo you are in.
