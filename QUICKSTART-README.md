@@ -11,7 +11,7 @@ relevant Quickstart guide available.
 * The `approov` command line tool [installed](https://approov.io/docs/latest/approov-installation/) with access to your account
 * The contents of the folder containing this README
 * [`Xcode`](https://developer.apple.com/xcode/) if you would like to build the iOS samples (version 12.3 used in this guide) and a real iOS device since the Approov SDK allows using a simulator but will ONLY authenticate a real iOS device
-* [`NativeScript`](https://docs.nativescript.org/) either version 6 or 7 (6.x and 7.2 used in this guide)
+* [`NativeScript`](https://docs.nativescript.org/) either version 6 or 7 (6.7.6 and 7.2.0 used in this guide)
 * [`Android Studio`](https://developer.android.com/studio) if you would like to follow the Android examples (version 4.1.2 used)
 
 ## WHAT YOU WILL LEARN
