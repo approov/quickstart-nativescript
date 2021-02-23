@@ -5,8 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const VERSION = process.env.APPROV_SDK_LIBRARY_ID || undefined;
 const ANDROID_SDK_NAME = 'approov.aar';
-const IOS_SDK_NAME = 'approov.zip';
-const IOS_FRAMEWORK_NAME = 'Approov.framework';
+const IOS_SDK_NAME = 'Approov.xcframework';
 
 module.exports = function (projectData, hookArgs) {
     const platform = (hookArgs.platform || (hookArgs.prepareData && hookArgs.prepareData.platform)).toLowerCase();
@@ -25,10 +24,6 @@ function addApproovSdkForIOS(projectData) {
             fsExtra.ensureDirSync(copyPath);
 
             await executeCommand('mv', `${projectData.projectDir}/${IOS_SDK_NAME}`, `${copyPath}/${IOS_SDK_NAME}`);
-            if (fs.existsSync(`${copyPath}/${IOS_FRAMEWORK_NAME}`)) {
-                return resolve();
-            }
-            await executeCommand('unzip', '-d', copyPath, `${copyPath}/${IOS_SDK_NAME}`);
             resolve();
         } catch (e) {
             reject(e);
