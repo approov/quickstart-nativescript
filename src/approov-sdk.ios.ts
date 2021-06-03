@@ -169,6 +169,8 @@ export class NSApproov extends NSApproovCommon {
           } else if (isObject(cont)) {
             dict = NSMutableDictionary.new<string, any>();
             Object.keys(cont).forEach(key => dict.setValueForKey(cont[key] as any, key));
+          } else {
+            dict = cont;
           }
         }
 
