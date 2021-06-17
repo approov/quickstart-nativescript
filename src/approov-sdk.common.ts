@@ -10,8 +10,7 @@ export interface HttpRequestOptions {
   url: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD';
   headers?: Headers;
-  params?: RequestBody | FormData;
-  body?: RequestBody | FormData;
+  body?: RequestBody | FormData | string;
   timeout?: number; // Default is 10
   /**
    * On Android large responses may crash the app (fi. https://httpbin.org/bytes/10000).

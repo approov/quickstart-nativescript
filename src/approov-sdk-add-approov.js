@@ -15,6 +15,11 @@ module.exports = function (projectData, hookArgs) {
 function addApproovSdkForIOS(projectData) {
     return new Promise(async (resolve, reject) => {
         const copyPath = path.join(projectData.projectDir, 'node_modules', PACKAGE_NAME, 'platforms', 'ios').toString();
+        if (fs.existsSync(`${copyPath}/${IOS_SDK_NAME}`)) {
+            resolve();
+
+            return;
+        }
         try {
             if (VERSION) {
                 await executeCommand('approov', 'sdk', '-getLibrary', IOS_SDK_NAME, '-libraryID', VERSION);
