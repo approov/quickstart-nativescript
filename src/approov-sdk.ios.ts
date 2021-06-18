@@ -8,6 +8,20 @@ import { isNullOrUndefined, isObject } from 'tns-core-modules/utils/types';
 import * as applicationSettings from 'tns-core-modules/application-settings';
 import * as utils from 'tns-core-modules/utils/utils';
 
+class CustomJSONSerializer extends AFJSONRequestSerializer {
+  // Override method for string json body (To preserve dictionary keys ordering).
+  requestBySerializingRequestWithParametersError(request: NSURLRequest, parameters: any): NSURLRequest {
+    if (typeof parameters === 'string') {
+      const copiedRequest: NSMutableURLRequest = request.mutableCopy();
+      copiedRequest.setValueForHTTPHeaderField('application/json', 'Content-Type');
+      copiedRequest.HTTPBody = NSString.stringWithString(parameters).dataUsingEncoding(NSUTF8StringEncoding);
+
+      return copiedRequest;
+    }
+    return super.requestBySerializingRequestWithParametersError(request, parameters);
+  }
+}
+
 // @dynamic
 export class NSApproov extends NSApproovCommon {
   /**
@@ -95,7 +109,7 @@ export class NSApproov extends NSApproovCommon {
 
   static AFFailure(resolve, reject, task: NSURLSessionDataTask, error: NSError) {
     let data: NSDictionary<string, any> & NSData & NSArray<any> = error.userInfo.valueForKey(AFNetworkingOperationFailingURLResponseDataErrorKey);
-    const response = (task.response as NSHTTPURLResponse);
+    const response = ((task || {})['response'] as NSHTTPURLResponse);
     let parsedData = getData(data);
 
     let reason = error.localizedDescription;
@@ -122,7 +136,7 @@ export class NSApproov extends NSApproovCommon {
           opts.headers['Content-Type'] &&
           opts.headers['Content-Type'].toString().substring(0, 16) === 'application/json'
         ) {
-          manager.requestSerializer = AFJSONRequestSerializer.serializer();
+          manager.requestSerializer = CustomJSONSerializer.alloc().init();
           manager.responseSerializer = AFJSONResponseSerializer.serializerWithReadingOptions(NSJSONReadingOptions.AllowFragments);
         } else {
           manager.requestSerializer = AFHTTPRequestSerializer.serializer();
