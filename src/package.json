@@ -97,7 +97,6 @@
     "@nativescript/angular": "10.1.7",
     "@nativescript/core": "7.0.13",
     "@nativescript/types": "7.0.4",
-    "@nativescript/webpack": "3.0.8",
     "ng-packagr": "11.0.3",
     "prompt": "1.0.0",
     "rimraf": "2.7.1",
@@ -111,7 +110,7 @@
   "dependencies": {
     "@nativescript/hook": "2.0.0",
     "fs-extra": "^9.0.1",
-    "ts-node": "^10.0.0"
+    "ts-node": "^9.0.0"
   },
   "bootstrapper": "nativescript-plugin-seed"
 }
