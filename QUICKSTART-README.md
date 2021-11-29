@@ -304,7 +304,7 @@ If you have a trial (as opposed to demo) account you have some additional option
 * Use `approov metrics` to see [Live Metrics](https://approov.io/docs/latest/approov-usage-documentation/#live-metrics)
   of the cause of failure.
 * You can use a debugger and get valid Approov tokens on a specific device
-  by [whitelisting](https://approov.io/docs/latest/approov-usage-documentation/#adding-a-device-security-policy).
+  by ensuring it [always passes](https://approov.io/docs/latest/approov-usage-documentation/#adding-a-device-security-policy).
 
 ## NEXT STEPS
 
