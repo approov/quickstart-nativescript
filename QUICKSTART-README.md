@@ -330,6 +330,7 @@ other Approov features:
 * Investigate other advanced features, such
   as [Offline Security Mode](https://approov.io/docs/latest/approov-usage-documentation/#offline-security-mode),
   [DeviceCheck Integration](https://approov.io/docs/latest/approov-usage-documentation/#apple-devicecheck-integration),
+  [AppAttest Integration](https://approov.io/docs/latest/approov-usage-documentation/#apple-appattest-integration),
   [SafetyNet Integration](https://approov.io/docs/latest/approov-usage-documentation/#google-safetynet-integration),
   and [Android Automated Launch Detection](https://approov.io/docs/latest/approov-usage-documentation/#android-automated-launch-detection)
   .
