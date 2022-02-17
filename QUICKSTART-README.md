@@ -57,24 +57,6 @@ really just to test connectivity and to verify that you have built, installed an
     <img src="images/hello.jpg" width="256" title="Shapes App Good">
 </a>
 
-A successful _shapes_ request to `/v1/shapes` returns one of four possible shapes:
-
-<a>
-    <img src="images/shape-triangle.jpg" width="256" title="Triangle">
-</a>
-
-<a>
-    <img src="images/shape-circle.jpg" width="256" title="Circle">
-</a>
-
-<a>
-    <img src="images/shape-square.jpg" width="256" title="Square">
-</a>
-
-<a>
-    <img src="images/shape-rectangle.jpg" width="256" title="Rectangle">
-</a>
-
 To build the NativeScript Shapes app, first ensure that you have the `npm` package manager installed for your system (
 see the instructions for your specific OS [here](https://nodejs.org/en/)). Also make sure your system is set up for
 NativeScript development by following their [Setup](https://docs.nativescript.org/start/quick-setup#full-setup)
@@ -252,13 +234,25 @@ service, untempered apps will attest successfully and begin to fetch and transmi
 ## RUNNING THE SHAPES APP WITH APPROOV
 
 Wait for the registration to propagate to the Approov service. This could take up to 30 seconds. Then restart your
-application to flush out any bad tokens, tap _Get Shape_ and you should see:
+application to flush out any bad tokens, tap _Get Shape_ and you should see one of four possible shapes (but with "protected" shown in the text):
 
-<p>
-    <img src="images/protected.jpg" width="256" title="Success">
-</p>
+<a>
+    <img src="images/shape-triangle.jpg" width="256" title="Triangle">
+</a>
 
-or any of the four possible shapes returned by the server. Congratulations, your API is now Approoved!
+<a>
+    <img src="images/shape-circle.jpg" width="256" title="Circle">
+</a>
+
+<a>
+    <img src="images/shape-square.jpg" width="256" title="Square">
+</a>
+
+<a>
+    <img src="images/shape-rectangle.jpg" width="256" title="Rectangle">
+</a>
+
+Congratulations, your API is now Approoved!
 
 ## WHAT IF I DON'T GET SHAPES
 
