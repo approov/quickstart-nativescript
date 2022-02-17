@@ -117,7 +117,7 @@ tns run ios
 tns run ios --teamId XXXXXXXXXX (This is your 10 character Team ID)
 ```
 
-Now grab a shape and enjoy the endless family fun!
+You should be able to get a valid response from the Hello button.
 
 ## ADDING APPROOV SUPPORT
 
