@@ -186,9 +186,7 @@ NSApproov.setApproovHeader('shapes.approov.io', { token: 'Approov-Token', bindin
 
 ### Select the Correct Shapes Endpoint
 
-The Shapes server provides the app with shapes using multiple versions of an API: version
-1 (https://shapes.approov.io/v1/shapes) which is _not_ protected by Approov, and version
-2 (https://shapes.approov.io/v2/shapes) which _is_ protected by Approov.
+The Shapes server provides the app with shapes using multiple versions of an API. Version 2 (https://shapes.approov.io/v2/shapes) requires an Approov token to be submitted in the request.
 
 Now that we’re using Approov, let’s switch to use version 2 of the Shapes API.
 
