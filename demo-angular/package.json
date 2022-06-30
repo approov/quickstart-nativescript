@@ -12,7 +12,6 @@
     "@angular/platform-browser": "~13.2.0",
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
-    "@approov/nativescript-approov": "file:../publish/package/approov-nativescript-approov-3.0.34.tgz",
     "@nativescript/angular": "^13.0.0",
     "@nativescript/core": "~8.2.0",
     "@nativescript/theme": "~3.0.2",
