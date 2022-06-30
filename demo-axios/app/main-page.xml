@@ -1,0 +1,20 @@
+<Page
+  xmlns="http://schemas.nativescript.org/tns.xsd"
+  loaded="pageLoaded"
+  class="page"
+>
+  <GridLayout rows="auto,*,auto" columns="*" height="100%">
+    <Label text="Approov Shapes (Axios)" class="heading" row="0"/>
+    <!-- Image Container -->
+    <StackLayout orientation="vertical" horizontalAlignment="center" verticalAlignment="center" row="1">
+      <Image src="{{ imageUrl }}"/>
+
+      <Label text="{{ message }}" textWrap="true" class="text-center sub-text"/>
+    </StackLayout>
+    <FlexboxLayout col="0" row="2" justifyContent="space-around" margin="20">
+      <!-- Buttons -->
+      <Button text="Hello" tap="onHelloButtonTap" class="-primary -rounded-lg" padding="5"/>
+      <Button text="Shape" tap="onShapeButtonTap" class="-primary -rounded-lg" padding="5"/>
+    </FlexboxLayout>
+  </GridLayout>
+</Page>
