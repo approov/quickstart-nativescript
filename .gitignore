@@ -3,6 +3,7 @@
 .DS_Store
 *.esm.json
 *.js
+!webpack.config.js
 !src/*-hooks.js
 !src/approov-sdk-add-approov.js
 !src/approov-sdk-copy-config.js
@@ -14,7 +15,6 @@ src/**/*.map
 *.metadata.json
 *.ngfactory.d.ts
 src/**/*.d.ts
-src/**/*.aar
 !src/references.d.ts
 !src/scripts/*.js
 !src/platforms/ios/typings/*.d.ts
@@ -31,8 +31,3 @@ demo/platforms
 node_modules
 publish/src
 publish/package
-demo/report/report.html
-demo/report/stats.json
-src/platforms/android/*.aar
-src/platforms/ios/*.framework
-src/platforms/ios/*.zip
