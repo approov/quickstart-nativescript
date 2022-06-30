@@ -110,7 +110,7 @@ The returned `Promise` is rejected if the `precheck` failed.
 Gets the [device ID](https://approov.io/docs/latest/approov-usage-documentation/#extracting-the-device-id) used by Approov to identify the particular device that the SDK is running on. Note that different Approov apps on the same device will return a different ID. Moreover, the ID may be changed by an uninstall and reinstall of the app.
 
 ```Javascript
-ApproovService.getDeviceID(): string;
+ApproovService.getDeviceID(): String;
 ```
 
 ## SetDataHashInToken
@@ -124,14 +124,14 @@ ApproovService.setDataHashInToken(data: string): void;
 Performs an Approov token fetch for the given `url`. This should be used in situations where it is not possible to use the networking interception to add the token. This will likely require network access so may take some time to complete.
 
 ```Javascript
-ApproovService.fetchToken(url: string): Promise<string>;
+ApproovService.fetchToken(url: string): Promise<String>;
 ```
 
 ## GetMessageSignature
 Gets the [message signature](https://approov.io/docs/latest/approov-usage-documentation/#message-signing) for the given `message`. This uses an account specific message signing key that is transmitted to the SDK after a successful fetch if the facility is enabled for the account. Note that if the attestation failed then the signing key provided is actually random so that the signature will be incorrect. An Approov token should always be included in the message being signed and sent alongside this signature to prevent replay attacks.
 
 ```Javascript
-ApproovService.getMessageSignature(message: string): string;
+ApproovService.getMessageSignature(message: string): String;
 ```
 
 The returned `string` may be `null` if no previous Approov token has been fetched.
@@ -140,7 +140,7 @@ The returned `string` may be `null` if no previous Approov token has been fetche
 Fetches a [secure string](https://approov.io/docs/latest/approov-usage-documentation/#secure-strings) with the given `key`. If `newDef` is not `null` then a secure string for the particular app instance may be defined. In this case the new value is returned as the secure string. Use of an empty string for `newDef` removes the string entry. Note that the returned string should NEVER be cached by your app, you should call this function when it is needed.
 
 ```Javascript
-ApproovService.fetchSecureString(key: string, newDef: string): Promise<string>;
+ApproovService.fetchSecureString(key: string, newDef: string): Promise<String>;
 ```
 
 The returned `string` may be `null` if the `key` is not defined. The returned `Promise` is rejected if the device fails attestation.
@@ -149,7 +149,7 @@ The returned `string` may be `null` if the `key` is not defined. The returned `P
 Fetches a [custom JWT](https://approov.io/docs/latest/approov-usage-documentation/#custom-jwts) with the given marshaled JSON `payload`.
 
 ```Javascript
-ApproovService.fetchCustomJWT(payloa: string): Promise<string>;
+ApproovService.fetchCustomJWT(payloa: string): Promise<String>;
 ```
 
 The returned `Promise` is rejected if the device fails attestation.
