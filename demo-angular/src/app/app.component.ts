@@ -9,9 +9,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 export class AppComponent {
   readonly imageBaseUrl = '~/assets/';
   readonly imageExtension = 'png';
-  readonly VERSION = 'v1'; // Change To v2 when using Approov
+
+  // CHANGE TO v3 FOR APPROOV API PROTECTION
+  readonly VERSION = 'v1';
+
   readonly HELLO_URL = `https://shapes.approov.io/${this.VERSION}/hello`;
   readonly SHAPE_URL = `https://shapes.approov.io/${this.VERSION}/shapes`;
+
+  // COMMENT THE LINE BELOW IF USING APPROOV WITH SECRETS PROTECTION
+  readonly API_KEY = "yXClypapWNHIifHUWmBIyPFAm";
+
+  // UNCOMMENT THE LINE BELOW IF USING APPROOV WITH SECRETS PROTECTION
+  //readonly API_KEY = "shapes_api_key_placeholder";
 
   private image = 'approov';
 
@@ -22,14 +31,14 @@ export class AppComponent {
   }
 
   onHelloButtonTap(): void {
-    this.httpClient.get(this.HELLO_URL, { headers: { Authorization: 'key-token' } }).subscribe({
+    this.httpClient.get(this.HELLO_URL).subscribe({
       next: (response: { text: string; message: string }) => {
-        console.log('Response => ', response);
+        console.log('Hello Response => ', response);
         this.message = response.text;
         this.imageUrl = this.getImageUrl('hello');
       },
       error: (errorResponse: HttpErrorResponse) => {
-        console.log('HTTP ERROR HELLO => ', errorResponse);
+        console.log('Hello API Error Response ', errorResponse);
         this.message = `Error: ${errorResponse.status}, Message: ${errorResponse.statusText}`;
         this.imageUrl = this.getImageUrl('confused');
       }
@@ -37,9 +46,9 @@ export class AppComponent {
   }
 
   onShapeButtonTap(): void {
-    this.httpClient.get(this.SHAPE_URL, { headers: { Authorization: 'key-token' } }).subscribe({
+    this.httpClient.get(this.SHAPE_URL, { headers: { "Api-Key": this.API_KEY } }).subscribe({
       next: (response: any) => {
-        console.log('Response => ', response);
+        console.log('Shapes Response => ', response);
         this.message = response.status;
         this.imageUrl = this.getImageUrl(response.shape.toLowerCase());
       },

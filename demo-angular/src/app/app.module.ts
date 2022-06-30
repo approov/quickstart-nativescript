@@ -2,9 +2,8 @@ import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { AppComponent } from './app.component';
 import { NativeScriptHttpClientModule, NativeScriptModule } from '@nativescript/angular';
 
-/* Uncomment for Approov */
-// import { ApproovSdkPinningHttpClientModule } from '@approov/ns-approov-sdk/angular';
-// import { NSApproov } from '@approov/ns-approov-sdk';
+// UNCOMMENT FOR APPROOV
+//import { ApproovService } from '@approov/nativescript-approov';
 
 @NgModule({
   bootstrap: [
@@ -12,10 +11,7 @@ import { NativeScriptHttpClientModule, NativeScriptModule } from '@nativescript/
   ],
   imports: [
     NativeScriptModule,
-    NativeScriptHttpClientModule, // Comment this when using Approov
-
-    /* Uncomment for Approov */
-    // ApproovSdkPinningHttpClientModule,
+    NativeScriptHttpClientModule
   ],
   declarations: [
     AppComponent,
@@ -27,8 +23,10 @@ import { NativeScriptHttpClientModule, NativeScriptModule } from '@nativescript/
 })
 export class AppModule {
   constructor() {
-    /* Uncomment for Approov */
-    // NSApproov.initialize().then().catch(console.log);
-    // NSApproov.setApproovHeader('shapes.approov.io', { token: 'Approov-Token', binding: 'Authorization' });
+    // UNCOMMENT FOR APPROOV
+    //ApproovService.initialize("<enter-your-config-string-here>");
+
+    // UNCOMMENT FOR APPROOV WITH SECRETS PROTECTION
+    //ApproovService.addSubstitutionHeader("Api-Key", "");
   }
 }

@@ -14,22 +14,11 @@ pack() {
 
     echo 'Clearing /src and /package...'
     node_modules/.bin/rimraf "$TO_SOURCE_DIR"
-    node_modules/.bin/rimraf "$SOURCE_DIR"/angular/dist
     node_modules/.bin/rimraf "$PACK_DIR"
-
-    # packing related to Angular IVY
-    echo 'Compiling for Angular... '
-    node "$SOURCE_DIR"/node_modules/ng-packagr/cli/main.js -p "$SOURCE_DIR"/angular/package.json
 
     # copy src
     echo 'Copying src...'
     node_modules/.bin/ncp "$SOURCE_DIR" "$TO_SOURCE_DIR"
-
-    # remove angular from copied src
-    node_modules/.bin/rimraf "$TO_SOURCE_DIR"/angular
-
-    # copy dist generated from ng-packgr as src/angular
-    node_modules/.bin/ncp "$SOURCE_DIR"/angular/dist "$TO_SOURCE_DIR"/angular
 
     # copy README & LICENSE to src
     echo 'Copying README and LICENSE to /src...'

@@ -1,9 +1,15 @@
 /* Include.gradle configuration: http://docs.nativescript.org/plugins/plugins#includegradle-specification */
 
 android {
-	
+	repositories {
+        mavenCentral()
+        google()
+        maven { url "https://jitpack.io" }
+        jcenter()
+    }
 }
 
 dependencies {
-    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.github.approov:approov-android-sdk:3.0.0'
 }
