@@ -65,7 +65,7 @@ There are two buttons on the app. Pressing `Hello` will call the `shapes.approov
     <img src="images/hello.png" width="256" title="Hello Screen">
 </p>
 
-The `shape` button requests a random shape from the API key protected `/v1/shapes` endpoint. This should succeed and you should see a successful shapes call with this (or another shape):
+The `Shape` button requests a random shape from the API key protected `/v1/shapes` endpoint. This should succeed and you should see a successful shapes call with this (or another shape):
 
 <p>
     <img src="images/shape.png" width="256" title="Shape Screen">
@@ -150,7 +150,7 @@ approov sdk -bitcodeAdd 6557
 
 ## SHAPES APP WITH APPROOV API PROTECTION
 
-Do not make any further code changes and run the app again with either `ns run android` or `ns run ios`. Now press the `Get Shape` button. You should now see this (or another shape):
+Do not make any further code changes and run the app again with either `ns run android` or `ns run ios`. Now press the `Shape` button. You should now see this (or another shape):
 
 <p>
     <img src="images/shape-approoved.png" width="256" title="Shape Approoved Screen">
@@ -215,7 +215,7 @@ approov registration -add platforms/android/app/build/outputs/apk/debug/app-debu
 ns run android
 ```
 
-For iOS::
+For iOS:
 
 ```
 ns build ios
@@ -223,7 +223,7 @@ approov registration -add platforms/ios/build/Debug-iphoneos/demotypescript.ipa 
 ns run ios
 ```
 
-Run the app again without making any changes to the app and press the `Get Shape` button. You should now see this (or another shape):
+Run the app again without making any changes to the app and press the `Shape` button. You should now see this (or another shape):
 
 <p>
     <img src="images/shape.png" width="256" title="Shape Screen">
