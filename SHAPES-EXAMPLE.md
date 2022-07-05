@@ -183,7 +183,7 @@ const VERSION = 'v1';
 
 The `API_KEY` should also be changed to be defined as `shapes_api_key_placeholder`, removing the actual API key out of the code.
 
-We need to inform Approov that it needs to substitute the placeholder value for the real API key on the `Api-Key` header. Find this line within the `approovSetup` function and uncomment it:
+We need to inform Approov that it needs to substitute the placeholder value for the real API key on the `Api-Key` header. Find this line within the file and uncomment it:
 
 ```Typescript
 ApproovService.addSubstitutionHeader("Api-Key", "");
