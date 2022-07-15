@@ -4,9 +4,9 @@ This provides support for using [Approov](https://www.approov.io) in [`NativeScr
 
 This quickstart provides the basic steps for integrating Approov into your app. A more detailed step-by-step guide using a [Shapes App Example](https://github.com/approov/quickstart-nativescript/blob/main/SHAPES-EXAMPLE.md) is also available.
 
-Note that for Android the minimum supported version is 5.1 (SDK level 22). For iOS, only 64-bit devices are supported on iOS 10 or above.
-
 To follow this guide you should have received an onboarding email for a trial or paid Approov account.
+
+Note that for Android the minimum supported version is 5.1 (SDK level 22). For iOS, only 64-bit devices are supported on iOS 10 or above.
 
 ## ADDING THE APPROOV PLUGIN
 
