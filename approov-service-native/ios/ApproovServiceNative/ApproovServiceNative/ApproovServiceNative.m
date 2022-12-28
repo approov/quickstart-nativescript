@@ -752,6 +752,10 @@ NSDictionary<NSString *, NSDictionary<NSNumber *, NSData *> *> *sSPKIHeaders;
         0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05,
         0x00, 0x03, 0x82, 0x01, 0x0f, 0x00
     };
+    const unsigned char rsa3072SPKIHeader[] = {
+        0x30, 0x82, 0x01, 0xA2, 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05,
+        0x00, 0x03, 0x82, 0x01, 0x8F, 0x00
+    };
     const unsigned char rsa4096SPKIHeader[] = {
         0x30, 0x82, 0x02, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86, 0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05,
         0x00, 0x03, 0x82, 0x02, 0x0f, 0x00
@@ -767,6 +771,7 @@ NSDictionary<NSString *, NSDictionary<NSNumber *, NSData *> *> *sSPKIHeaders;
     sSPKIHeaders = @{
         (NSString *)kSecAttrKeyTypeRSA : @{
               @2048 : [NSData dataWithBytes:rsa2048SPKIHeader length:sizeof(rsa2048SPKIHeader)],
+              @3072 : [NSData dataWithBytes:rsa3072SPKIHeader length:sizeof(rsa3072SPKIHeader)],
               @4096 : [NSData dataWithBytes:rsa4096SPKIHeader length:sizeof(rsa4096SPKIHeader)]
         },
         (NSString *)kSecAttrKeyTypeECSECPrimeRandom : @{
@@ -780,7 +785,7 @@ NSDictionary<NSString *, NSDictionary<NSNumber *, NSData *> *> *sSPKIHeaders;
  * Gets the subject public key info (SPKI) header depending on a public key's type and size.
  * 
  * @param publicKey is the public key being analyzed
- * @return NSData* of the coresponding SPKI header that will be used
+ * @return NSData* of the coresponding SPKI header that will be used or nil if not supported
  */
 + (NSData *)publicKeyInfoHeaderForKey:(SecKeyRef)publicKey {
     CFDictionaryRef publicKeyAttributes = SecKeyCopyAttributes(publicKey);
@@ -795,42 +800,11 @@ NSDictionary<NSString *, NSDictionary<NSNumber *, NSData *> *> *sSPKIHeaders;
  * Gets a certificate's Subject Public Key Info (SPKI).
  *
  * @param certificate is the certificate being analyzed
- * @return NSData* of the SPKI certificate information
+ * @return NSData* of the SPKI certificate information or nil if an error
  */
 + (NSData*)publicKeyInfoOfCertificate:(SecCertificateRef)certificate {
-    // get the public key from the certificate
-    SecKeyRef publicKey = nil;
-    if (@available(iOS 12.0, *)) {
-        publicKey = SecCertificateCopyKey(certificate);
-    } else {
-        // from TrustKit https://github.com/datatheorem/TrustKit/blob/master/TrustKit/Pinning/TSKSPKIHashCache.m lines
-        // 221-234:
-        // Create an X509 trust using the using the certificate
-        SecTrustRef trust;
-        SecPolicyRef policy = SecPolicyCreateBasicX509();
-        OSStatus status = SecTrustCreateWithCertificates(certificate, policy, &trust);
-        if (status != errSecSuccess) {
-            NSLog(@"%@: SecTrustCreateWithCertificates failed", TAG);
-            CFRelease(policy);
-            CFRelease(trust);
-            return nil;
-        }
-        
-        // get a public key reference for the certificate from the trust
-        SecTrustResultType result;
-        status = SecTrustEvaluate(trust, &result);
-        if (status != errSecSuccess) {
-            NSLog(@"%@: SecTrustEvaluate failed", TAG);
-            CFRelease(policy);
-            CFRelease(trust);
-            return nil;
-        }
-        publicKey = SecTrustCopyPublicKey(trust);
-        CFRelease(policy);
-        CFRelease(trust);
-    }
-
-    // exit early if no public key was obtained
+    // get the public key from the certificate and quite early if it is not obtained
+    SecKeyRef publicKey = SecCertificateCopyKey(certificate);
     if (publicKey == nil) {
         NSLog(@"%@: public key of certificate not obtained", TAG);
         return nil;
@@ -875,12 +849,7 @@ NSDictionary<NSString *, NSDictionary<NSNumber *, NSData *> *> *sSPKIHeaders;
     }
     
     // check the validity of the server trust
-    SecTrustResultType result;
-    OSStatus status = SecTrustEvaluate(serverTrust, &result);
-    if (status != errSecSuccess){
-        NSLog(@"%@: verifyPins failed server certificate validation", TAG);
-        return ApproovTrustDecisionBlock;
-    } else if ((result != kSecTrustResultUnspecified) && (result != kSecTrustResultProceed)){
+    if (!SecTrustEvaluateWithError(serverTrust, nil)) {
         NSLog(@"%@: verifyPins failed server trust validation", TAG);
         return ApproovTrustDecisionBlock;
     }
@@ -909,38 +878,41 @@ NSDictionary<NSString *, NSDictionary<NSNumber *, NSData *> *> *sSPKIHeaders;
     int certCountInChain = (int)SecTrustGetCertificateCount(serverTrust);
     int indexCurrentCert = 0;
     while (indexCurrentCert < certCountInChain) {
-        // get the certificate
+        // get the certificate - note that this function was deprecated in iOS 15 but the replacement function
+        // SecTrustCopyCertificateChain is only available from iOS 15 too and returns an array of certificates so
+        // has a significantly different interface, so the deprecated function must be used for now
         SecCertificateRef serverCert = SecTrustGetCertificateAtIndex(serverTrust, indexCurrentCert);
         if (serverCert == nil) {
             NSLog(@"%@: verifyPins check failed to read certificate from chain", TAG);
             return ApproovTrustDecisionBlock;
         }
 
-        // get the subject public key info from the certificate
+        // get the subject public key info from the certificate - we just ignore the certificate if we
+        // cannot obtain this in case it is a certificate type that is not supported but is not pinned
+        // to anyway
         NSData* publicKeyInfo = [self publicKeyInfoOfCertificate:serverCert];
         if (publicKeyInfo == nil) {
-            NSLog(@"%@: verifyPins check failed reading public key information", TAG);
-            return ApproovTrustDecisionBlock;
-        }
-        
-        // compute the SHA-256 hash of the public key info and base64 encode the result
-        CC_SHA256_CTX shaCtx;
-        CC_SHA256_Init(&shaCtx);
-        CC_SHA256_Update(&shaCtx,(void*)[publicKeyInfo bytes],(unsigned)publicKeyInfo.length);
-        unsigned char publicKeyHash[CC_SHA256_DIGEST_LENGTH] = {'\0',};
-        CC_SHA256_Final(publicKeyHash, &shaCtx);
-        NSString *publicKeyHashB64 = [[NSData dataWithBytes:publicKeyHash length:CC_SHA256_DIGEST_LENGTH] base64EncodedStringWithOptions:0];
-        
-        // match pins on the receivers host
-        for (NSString *pinHashB64 in pinsForHost) {
-            if ([pinHashB64 isEqualToString:publicKeyHashB64]) {
-                NSLog(@"%@: verifyPins for %@ matched public key pin %@ from %lu pins", TAG, host, pinHashB64, [pinsForHost count]);
-                return ApproovTrustDecisionAllow;
+            NSLog(@"%@: verifyPins check failed creation of public key information", TAG);
+        } else {
+            // compute the SHA-256 hash of the public key info and base64 encode the result
+            CC_SHA256_CTX shaCtx;
+            CC_SHA256_Init(&shaCtx);
+            CC_SHA256_Update(&shaCtx,(void*)[publicKeyInfo bytes],(unsigned)publicKeyInfo.length);
+            unsigned char publicKeyHash[CC_SHA256_DIGEST_LENGTH] = {'\0',};
+            CC_SHA256_Final(publicKeyHash, &shaCtx);
+            NSString *publicKeyHashB64 = [[NSData dataWithBytes:publicKeyHash length:CC_SHA256_DIGEST_LENGTH] base64EncodedStringWithOptions:0];
+            
+            // match pins on the receivers host
+            for (NSString *pinHashB64 in pinsForHost) {
+                if ([pinHashB64 isEqualToString:publicKeyHashB64]) {
+                    NSLog(@"%@: verifyPins for %@ matched public key pin %@ from %lu pins", TAG, host, pinHashB64, [pinsForHost count]);
+                    return ApproovTrustDecisionAllow;
+                }
             }
         }
 
         // move to the next certificate in the chain
-        indexCurrentCert += 1;
+        indexCurrentCert++;
     }
 
     // the presented public key did not match any of the pins

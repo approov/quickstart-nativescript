@@ -6,19 +6,15 @@
 	<dict>
 		<key>Frameworks/Approov.framework/Approov</key>
 		<data>
-		F1Hrzc14JbNmZX2sMl6lA8K68AY=
+		FyEidgkJQ4VUhAIHmB4NaMIsTAw=
 		</data>
 		<key>Frameworks/Approov.framework/Info.plist</key>
 		<data>
-		J0yhoTeKLpNgk8jrlQQajlqfgfA=
-		</data>
-		<key>Frameworks/Approov.framework/_CodeSignature/CodeResources</key>
-		<data>
-		tFoengr4262NehiE223SJf4L2DM=
+		ERgQo9QGP4CEAVzoI0rnt6ieFL0=
 		</data>
 		<key>Frameworks/Approov.framework/cbconfig.plist</key>
 		<data>
-		fZz3lrHdCC/zWPsSiEDaRwGsiWE=
+		2VgHY+8s5cqmEr4eL3B/e+JoPx4=
 		</data>
 		<key>Headers/ApproovServiceNative.h</key>
 		<data>
@@ -26,7 +22,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		CtcsMwVWz43XA1mKZ3xCigLbkrY=
+		b4eLjkIzs4oxeaf3J0bKKPRLj78=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -39,28 +35,21 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eF/Ni4uRyXeagr86YW7XA1dDQnafqgbJgMdzdUXzi68=
+			QfpBTwTnO4WC+SLd3kaubA4mEi1ZexUQz2XacQKQjog=
 			</data>
 		</dict>
 		<key>Frameworks/Approov.framework/Info.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			E5ltR06GRy2QtL9Qinux9gHk/ocDf1pnpbqmJ4n7dtg=
-			</data>
-		</dict>
-		<key>Frameworks/Approov.framework/_CodeSignature/CodeResources</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			AwUNRk8ww80Nwt2cPEyhSYIWdyhxqRWmBHofHqY4LQM=
+			f+g9SOsnX1hxspk4qRZIyq77p3Np6rQXqGALW9yl5a8=
 			</data>
 		</dict>
 		<key>Frameworks/Approov.framework/cbconfig.plist</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			UiqdKTOC9bqxyHTREooYJDwJwWfGEWkeV6tmoAvUpEo=
+			z6WD8aUwKLwxZNL2vxMpk+Sv5Y39pvTtwIIbOVg8Jgk=
 			</data>
 		</dict>
 		<key>Headers/ApproovServiceNative.h</key>
