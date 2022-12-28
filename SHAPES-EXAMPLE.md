@@ -17,7 +17,13 @@ This quickstart is written specifically for Android and iOS apps that are implem
 
 A number of different variants of the shapes app are provided, namely `demo-typescript`, `demo-axios`, `demo-vue` and `demo-angular`, showing the use of different app flavours and underlying networking stacks. This run through will use `demo-typescript`, but it is possible to go through the steps using any of these different variants. Just be aware that the filenames and location of Approov specific commented out code may be different for the other variants.
 
-Firstly, clone this repo and `cd quickstart-nativescript/demo-typescript`. You can then run on either Android or iOS as follows:
+Firstly, clone this repo and change directory:
+
+```
+cd quickstart-nativescript/demo-typescript
+```
+
+You can then run on either Android or iOS as follows:
 
 ### Android
 
