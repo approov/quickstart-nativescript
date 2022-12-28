@@ -4,9 +4,9 @@ This quickstart is written specifically for Android and iOS apps that are implem
 
 ## WHAT YOU WILL NEED
 * Access to a trial or paid Approov account
-* [`NativeScript`](https://docs.nativescript.org/), version 8.2.3 is used in this guide. Follow the instructions to [setup your system](https://docs.nativescript.org/environment-setup.html) as NativeScript has various dependencies on which it relies. Note that when installing Python 2.x on a modern MacOS machine, install Python 2.7 directly and do not follow the advice on using a symbolic link to the Python3 installation, as this seems to lead to complaints from `xcode-select` and the Xcode command line tools.
+* [`NativeScript`](https://docs.nativescript.org/), version 8.4.1 is used in this guide. Follow the instructions to [setup your system](https://docs.nativescript.org/environment-setup.html) as NativeScript has various dependencies on which it relies. Note that when installing Python 2.x on a modern MacOS machine, install Python 2.7 directly and do not follow the advice on using a symbolic link to the Python3 installation, as this seems to lead to complaints from `xcode-select` and the Xcode command line tools.
 * [Android Studio](https://developer.android.com/studio) installed (version Bumblebee 2021.1 is used in this guide) if you will build the Android app. Note that the `ANDROID_HOME` value must be properly defined to allow building.
-* [Xcode](https://developer.apple.com/xcode/) installed (version 13.4.1 is used in this guide) to build iOS version of application
+* [Xcode](https://developer.apple.com/xcode/) installed (version 14.1 is used in this guide) to build iOS version of application
 * [Cocoapods](https://cocoapods.org) installed to support iOS building (1.11.3 used in this guide)
 * The `approov` command line tool [installed](https://approov.io/docs/latest/approov-installation/) with access to your account
 * An iOS device or simulator if you are using the iOS platform
