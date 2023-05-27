@@ -117,7 +117,8 @@ ApproovService.precheck()
         // (note error.rejectionReasons is only available if the feature is enabled, otherwise it is
         // always an empty string)
     else if (error.type == "network")
-        // failure due to a potentially temporary networking issue, allow for a user initiated retry, see error.message
+        // failure due to a potentially temporary networking issue, allow for a user initiated retry,
+        // see error.message
     else
         // a more permanent error, see error.message
 });
