@@ -2,7 +2,7 @@
 
 This provides support for using [Approov](https://www.approov.io) in [`NativeScript`](https://docs.nativescript.org/) mobile applications, including Angular and Vue. Support is provided for adding Approov protection to API requests made using the [`Http module`](https://docs.nativescript.org/http.html) and also Angular [`Http`](https://v7.docs.nativescript.org/angular/ng-framework-modules/http) requests. Furthermore, requests using [`Axios`](https://axios-http.com/) are also supported. If this is not your situation then check if there is a more relevant quickstart guide available.
 
-This quickstart provides the basic steps for integrating Approov into your app. A more detailed step-by-step guide using a [Shapes App Example](https://github.com/approov/quickstart-nativescript/blob/main/SHAPES-EXAMPLE.md) is also available.
+This page provides all the steps for integrating Approov into your app. Additionally, a step-by-step tutorial guide using our [Shapes App Example](https://github.com/approov/quickstart-nativescript/blob/main/SHAPES-EXAMPLE.md) is also available.
 
 To follow this guide you should have received an onboarding email for a trial or paid Approov account.
 
