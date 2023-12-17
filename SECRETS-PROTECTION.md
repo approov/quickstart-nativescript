@@ -13,14 +13,7 @@ approov api -add your.domain -noApproovToken
 This informs Approov that it should be active for the domain, but does not need to send Approov tokens for it. Adding the domain uses [Managed Trust Roots](https://approov.io/docs/latest/approov-usage-documentation/#managed-trust-roots) to ensure that the channel will be protected against Man-in-the-Middle (MitM) attacks.
 
 ## MIGRATING THE SECRET INTO APPROOV
-It is assumed that you already have some client secrets and/or API keys in your app that you would like to migrate for protection by Approov. To do this you first need to enable the [Secure Strings](https://approov.io/docs/latest/approov-usage-documentation/#secure-strings) feature:
-
-```
-approov secstrings -setEnabled
-```
-> Note that this command requires an [admin role](https://approov.io/docs/latest/approov-usage-documentation/#account-access-roles).
-
-You must inform Approov what the value of each secret is as follows:
+It is assumed that you already have some client secrets and/or API keys in your app that you would like to migrate for protection by Approov. You must inform Approov what the value of each secret is as follows:
 
 ```
 approov secstrings -addKey your-secret-name -predefinedValue your-secret-value
