@@ -2,7 +2,7 @@
 
 This is provided as an Xcode project that builds a `.framework`. It is necessary to build a `.framework` for both real devices and simulators, and to then manually create a `.xcframework` to be used in the plugin itself.
 
-Note that this project contains a reference to the `Approov.xcframework` SDK that is placed at `src/platforms/ios`. This must contain `bitcode` and this library is also built with bitcode support.
+Note that this project contains a reference to the `Approov.xcframework` SDK that is placed at `src/platforms/ios`.
 
 ## Building
 - Open the project at `approov-service-native/ios/ApproovServiceNative.xcodeproj`

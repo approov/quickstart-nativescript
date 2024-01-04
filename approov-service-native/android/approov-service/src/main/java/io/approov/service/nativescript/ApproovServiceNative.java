@@ -227,6 +227,31 @@ public class ApproovServiceNative {
   }
 
   /**
+   * Sets a development key indicating that the app is a development version and it should
+   * pass attestation even if the app is not registered or it is running on an emulator. The
+   * development key value can be rotated at any point in the account if a version of the app
+   * containing the development key is accidentally released. This is primarily
+   * used for situations where the app package must be modified or resigned in
+   * some way as part of the testing process.
+   *
+   * @param devKey is the development key to be used
+   * @return ApproovResult to indicate any errors
+   */
+  public static ApproovResult setDevKey(String devKey) {
+    try {
+      Approov.setDevKey(devKey);
+      Log.d(TAG, "setDevKey");
+    }
+    catch (IllegalStateException e) {
+      return new ApproovResult("IllegalState: " + e.getMessage(), false);
+    }
+    catch (IllegalArgumentException e) {
+      return new ApproovResult("IllegalArgument: " + e.getMessage(), false);
+    }
+    return new ApproovResult(null);
+  }
+
+  /**
    * Sets the header that the Approov token is added on, as well as an optional
    * prefix String (such as "Bearer "). By default the token is provided on
    * "Approov-Token" with no prefix.

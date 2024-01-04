@@ -8,7 +8,7 @@ In order to minimize the necessary code changes the integration hooks the underl
 
 A Typescript interface allows configuration and control of Approov, and for accessing more advanced functionality. This Typescript layer actually bridges to a native code layer that sits on top of the Approov SDK itself. This bridging layer has to be pre-built and packaged with the plugin. Its source code can be found in the `approov-service-native` folder at the top level of the repo.
 
-For Android the Approov SDK itself is included via a gradle jitpack dependency to the repo holding the latest SDK. For iOS, the bitcode version of the SDK is actually included in this repo.
+For Android the Approov SDK itself is included via a gradle jitpack dependency to the repo holding the latest SDK. For iOS the SDK is actually included in this repo.
 
 ## Example Comparator Project
 

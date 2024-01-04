@@ -1,6 +1,6 @@
 framework module ApproovServiceNative {
   umbrella header "ApproovServiceNative.h"
-
   export *
+
   module * { export * }
 }

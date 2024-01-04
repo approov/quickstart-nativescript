@@ -68,6 +68,8 @@ declare class ApproovServiceNative extends NSObject {
 
 	static setDataHashInToken(data: string): ApproovResult;
 
+	static setDevKey(devKey: string): ApproovResult;
+
 	static setProceedOnNetworkFail(): void;
 
 	static setTokenHeaderPrefix(header: string, prefix: string): void;

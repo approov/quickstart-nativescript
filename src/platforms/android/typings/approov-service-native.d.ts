@@ -39,6 +39,7 @@ declare module io {
 					public static removeExclusionURLRegex(param0: string): void;
 					public static setTokenHeader(param0: string, param1: string): void;
 					public static fetchSecureString(param0: string, param1: string, param2: io.approov.service.nativescript.ApproovServiceNative.ResultCallback): void;
+					public static setDevKey(param0: string): io.approov.service.nativescript.ApproovResult;
 					public static fetchCustomJWT(param0: string, param1: io.approov.service.nativescript.ApproovServiceNative.ResultCallback): void;
 					public static fetchToken(param0: string, param1: io.approov.service.nativescript.ApproovServiceNative.ResultCallback): void;
 				}

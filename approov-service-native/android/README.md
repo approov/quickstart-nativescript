@@ -5,9 +5,9 @@ This is provided as an Android project that builds an AAR. This AAR can then be 
 ## Building
 - Open this folder as "an existing project" in Android Studio
 - Make modifications as required
+- Ensure that the build variant selected is release
 - Use `Build -> Make Project` menu item to build a new AAR
-- The output will be generate in `approov-service/build/outputs/aar/approov-service-release.aar`
-- Copy the release AAR from the repo root, run `cp approov-service-native/android/approov-service/build/outputs/aar/approov-service-release.aar src/platforms/android/` 
+- Copy the release AAR, from the repo root run `cp approov-service-native/android/approov-service/build/outputs/aar/approov-service-release.aar src/platforms/android/` 
 
 ## Typings
 If a change is made to the interface of the `ApproovServiceNative` layer then it is necessary to regenerate the typings, which provides information about the interface to the typescript layer.
