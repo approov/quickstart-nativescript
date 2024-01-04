@@ -24,6 +24,10 @@ export abstract class ApproovServiceCommon {
     throw new Error('Method not overridden');
   }
 
+  static setDevKey(devKey: string): void {
+    throw new Error('Method not overridden');
+  }
+
   static setTokenHeader(header: string, prefix: string): void {
     throw new Error('Method not overridden');
   }

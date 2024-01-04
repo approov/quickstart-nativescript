@@ -55,6 +55,10 @@ export class ApproovService extends ApproovServiceCommon {
       ApproovServiceNative.setProceedOnNetworkFail();
   }
 
+  static setDevKey(devKey: string): void {
+    ApproovServiceNative.setDevKey(devKey);
+  }
+
   static setTokenHeader(header: string, prefix: string): void {
       ApproovServiceNative.setTokenHeaderPrefix(header, prefix);
   }
